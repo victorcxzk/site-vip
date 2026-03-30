@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Entrar</title>
+  <title>Entrar • Beatriz Lopes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -13,30 +13,34 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
-        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Foto principal"></span>
-        <span><span class="brand-title">Seu Espaço Privado</span><span class="brand-sub">conteúdo exclusivo</span></span>
+        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
+        <span><span class="brand-title">Beatriz Lopes</span><span class="brand-sub">privacy exclusivo 😈</span></span>
       </a>
-      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="/assinar.html">Liberar acesso</a></nav>
-      <div class="header-actions"><a class="button ghost" href="/criar-conta.html">Criar conta</a></div>
+      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
+      <div class="header-actions">
+        <a class="button" href="/criar-conta.html" data-guest-only>Criar conta</a>
+        <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>@<span data-user-name>usuario</span></a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
     </div>
   </header>
   <main class="auth-layout">
     <div class="container auth-grid">
       <div class="auth-side">
-        <img src="/img/hero-cover.svg" alt="Imagem principal">
+        <img src="/img/hero-cover.svg" alt="Beatriz Lopes">
         <div class="auth-side-copy">
-          <h2>Entre e continue de onde parou.</h2>
-          <p>Seu cadastro leva poucos segundos e sua área fica pronta para receber o acesso assim que você liberar.</p>
+          <h2>Entra e vem ver tudo mais de perto 😈</h2>
+          <p>Seu acesso fica salvo na conta. Depois é só liberar e aproveitar 💋</p>
         </div>
       </div>
       <section class="glass-card form-card">
         <h1>Entrar</h1>
-        <p>Use o e-mail e a senha que você cadastrou.</p>
+        <p>Coloca seu e-mail e sua senha pra voltar rapidinho 🔥</p>
         <form id="loginForm" novalidate>
           <div class="field"><label for="email">E-mail</label><input id="email" type="email" autocomplete="email"></div>
           <div class="field"><label for="senha">Senha</label><input id="senha" type="password" autocomplete="current-password"></div>
           <div class="form-actions">
-            <button class="button" type="submit">Entrar</button>
+            <button class="button" type="submit">Entrar 😈</button>
             <a class="button ghost" href="/criar-conta.html">Criar conta</a>
           </div>
           <div class="inline-links"><a href="/redefinir-senha.html">Esqueci minha senha</a></div>

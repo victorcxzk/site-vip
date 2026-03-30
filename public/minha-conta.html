@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Minha conta</title>
+  <title>Minha conta • Beatriz Lopes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -13,10 +13,10 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
-        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Foto principal"></span>
-        <span><span class="brand-title">Seu Espaço Privado</span><span class="brand-sub">conteúdo exclusivo</span></span>
+        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
+        <span><span class="brand-title">Beatriz Lopes</span><span class="brand-sub">privacy exclusivo 😈</span></span>
       </a>
-      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="/conteudo.html" data-member-link>Conteúdo</a><a href="/assinar.html">Liberar acesso</a></nav>
+      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="/conteudo.html" data-member-link>Conteúdos</a><a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
       <div class="header-actions"><a class="button ghost" href="/admin.html" data-admin-only hidden>Admin</a><button class="button" onclick="logout()">Sair</button></div>
     </div>
   </header>
@@ -24,20 +24,20 @@
     <div class="container member-layout">
       <section class="member-box card">
         <span class="badge" id="memberStatus">Seu acesso ainda não foi liberado</span>
-        <h2>Sua conta</h2>
-        <p>Edite seu perfil, confira seu pedido e volte quando quiser.</p>
+        <h2>Sua conta 💖</h2>
+        <p>Deixa tudo certinho e acompanha seu pedido por aqui.</p>
         <form id="accountForm" novalidate>
           <div class="field"><label for="nome">Nome</label><input id="nome" type="text"></div>
           <div class="field"><label for="usuario">Usuário</label><input id="usuario" type="text"></div>
           <div class="field"><label for="telegram">Telegram</label><input id="telegram" type="text"></div>
-          <div class="field"><label for="bio">Recado</label><textarea id="bio" rows="4" placeholder="Escreva algo curto, se quiser."></textarea></div>
+          <div class="field"><label for="bio">Recadinho</label><textarea id="bio" rows="4" placeholder="Se quiser, deixa um recado aqui 😏"></textarea></div>
           <div class="form-actions"><button class="button" type="submit">Salvar</button><a class="button ghost" href="/assinar.html">Liberar acesso</a></div>
           <div class="message-box" data-message></div>
         </form>
       </section>
       <section class="member-box card">
-        <h2>Seu pedido</h2>
-        <p>Quando você tocar em liberar acesso, ele aparece aqui automaticamente.</p>
+        <h2>Seu pedido 😈</h2>
+        <p>Quando você pedir o acesso, o andamento aparece aqui.</p>
         <div id="requestHistory" class="mini-grid"></div>
       </section>
     </div>

@@ -1,6 +1,8 @@
 (function () {
   const PLAN_NAME = 'Vitalício';
   const PLAN_PRICE = 5.9;
+  const CREATOR_NAME = 'Beatriz Lopes';
+  const INSTAGRAM_URL = 'https://instagram.com/lopes.beeatrizz';
   let sb = null;
 
   function byId(id) { return document.getElementById(id); }
@@ -28,7 +30,7 @@
 
   function requireClient() {
     if (sb) return sb;
-    if (!configured()) throw new Error('Antes de usar o site, preencha o arquivo public/js/supabase-config.js com a URL e a chave pública do Supabase.');
+    if (!configured()) throw new Error('O site ainda não foi conectado ao Supabase.');
     sb = window.createSupabaseClient();
     if (!sb) throw new Error('Biblioteca do Supabase não carregada.');
     return sb;
@@ -89,26 +91,26 @@
     qsa('[data-guest-only]').forEach((el) => { el.hidden = !!user; });
     qsa('[data-auth-only]').forEach((el) => { el.hidden = !user; });
     qsa('[data-admin-only]').forEach((el) => { el.hidden = !admin; });
-    qsa('[data-user-name]').forEach((el) => { el.textContent = profile?.nome || user?.email?.split('@')[0] || 'Minha conta'; });
+    qsa('[data-user-name]').forEach((el) => { el.textContent = profile?.usuario || profile?.nome || user?.email?.split('@')[0] || 'minha-conta'; });
     qsa('[data-vip-state]').forEach((el) => { el.textContent = vip ? 'Acesso liberado' : 'Seu acesso'; });
     qsa('[data-member-link]').forEach((el) => { el.href = vip ? '/conteudo.html' : '/assinar.html'; });
 
     const action = byId('heroAction');
     if (action) {
       if (!user) {
-        action.textContent = 'Quero ver agora';
+        action.textContent = 'Quero meu acesso agora 😈';
         action.href = '/criar-conta.html';
       } else if (vip) {
-        action.textContent = 'Entrar no conteúdo';
+        action.textContent = 'Entrar nos conteúdos 😈';
         action.href = '/conteudo.html';
       } else {
-        action.textContent = 'Liberar meu acesso';
+        action.textContent = 'Liberar meu acesso 😈';
         action.href = '/assinar.html';
       }
     }
 
     const mini = byId('miniState');
-    if (mini) mini.textContent = !user ? 'Prévia liberada' : vip ? 'Você já tem acesso' : 'Falta só liberar seu acesso';
+    if (mini) mini.textContent = !user ? 'Prévia livre 🔥' : vip ? 'Seu acesso já está liberado 😈' : 'Falta só liberar seu acesso 💋';
   }
 
   async function signUp() {
@@ -140,7 +142,7 @@
       showMessage('error', error.message || 'Não foi possível criar sua conta.');
       return;
     }
-    showMessage('success', 'Conta criada. Agora é só entrar.');
+    showMessage('success', 'Conta criada 💖 agora é só entrar.');
     setTimeout(() => { window.location.href = '/login.html'; }, 900);
   }
 
@@ -154,7 +156,7 @@
     }
     const { error } = await client.auth.signInWithPassword({ email, password: senha });
     if (error) {
-      showMessage('error', 'Não foi possível entrar. Confira seus dados.');
+      showMessage('error', 'Não consegui entrar com esses dados. Confere e tenta de novo.');
       return;
     }
     window.location.href = '/index.html';
@@ -263,7 +265,7 @@
       });
       const result = await response.json().catch(() => ({}));
       if (!response.ok) throw new Error(result.error || 'Não foi possível enviar seu pedido.');
-      showMessage('success', 'Pronto. Seu pedido foi enviado. Agora fale comigo no Telegram para agilizar a liberação.');
+      showMessage('success', 'Pedido enviado 😈 agora me chama no Telegram pra eu liberar mais rápido.');
       const url = telegramLink(`Oi, acabei de pedir o acesso ${PLAN_NAME} de ${money(PLAN_PRICE)} no site.`);
       if (url) window.open(url, '_blank', 'noopener,noreferrer');
       await renderMyAccount();
@@ -282,12 +284,12 @@
     const ctaPrice = byId('ctaPrice');
     if (ctaPrice) ctaPrice.textContent = `${PLAN_NAME} · ${money(PLAN_PRICE)}`;
     if (!configured()) {
-      if (stateText) stateText.textContent = 'Complete a configuração do site e recarregue.';
+      if (stateText) stateText.textContent = 'Volta daqui a pouquinho 💖';
       return;
     }
     const auth = await ensureAuth({ redirect: false });
     if (!auth.user) return;
-    if (stateText) stateText.textContent = activeMember(auth.profile) ? 'Seu acesso já está liberado' : 'Seu perfil já está pronto para liberar tudo';
+    if (stateText) stateText.textContent = activeMember(auth.profile) ? 'Seu acesso já está liberado 😈' : 'Sua conta já está pronta pra entrar 💋';
   }
 
   async function renderSubscriptionPage() {
@@ -300,7 +302,7 @@
     if (!auth.user) return;
 
     const welcome = byId('buyerName');
-    if (welcome) welcome.textContent = auth.profile?.nome || auth.user.email || 'sua conta';
+    if (welcome) welcome.textContent = auth.profile?.nome || auth.profile?.usuario || auth.user.email || 'seu perfil';
 
     const already = byId('alreadyActive');
     const card = byId('planCard');
@@ -340,9 +342,9 @@
     const status = byId('memberStatus');
     if (status) {
       if (activeMember(profile)) {
-        status.textContent = `Seu acesso está liberado${profile.plano ? ` · ${profile.plano}` : ''}`;
+        status.textContent = `Acesso liberado 😈${profile.plano ? ` · ${profile.plano}` : ''}`;
       } else {
-        status.textContent = 'Seu acesso ainda não foi liberado';
+        status.textContent = 'Seu acesso ainda não foi liberado 💋';
       }
     }
 
@@ -359,7 +361,7 @@
           <span>${money(item.valor)}</span>
           <p>${item.status === 'aprovado' ? 'Aprovado' : item.status === 'cancelado' ? 'Cancelado' : 'Em análise'}</p>
         </div>
-      `).join('') || '<div class="empty-state">Seu pedido aparece aqui assim que você clicar em liberar acesso.</div>';
+      `).join('') || '<div class="empty-state">Assim que você pedir o acesso, ele aparece aqui 😈</div>';
     }
   }
 
@@ -447,7 +449,7 @@
   async function boot() {
     try {
       if (!window.createSupabaseClient || !window.supabase) {
-        showMessage('error', 'A biblioteca do site não carregou. Recarregue a página.');
+        showMessage('error', 'Não consegui carregar o site agora. Recarrega a página.');
         return;
       }
       if (configured()) sb = window.createSupabaseClient();
@@ -469,7 +471,7 @@
       if (document.body.dataset.page === 'admin' && configured()) await loadAdminUsers();
     } catch (error) {
       console.error(error);
-      showMessage('error', error.message || 'Algo saiu do esperado.');
+      showMessage('error', error.message || 'Algo não saiu como eu queria.');
     }
   }
 

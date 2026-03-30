@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin</title>
+  <title>Admin • Beatriz Lopes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -13,21 +13,21 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
-        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Foto principal"></span>
-        <span><span class="brand-title">Seu Espaço Privado</span><span class="brand-sub">painel do dono</span></span>
+        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
+        <span><span class="brand-title">Beatriz Lopes</span><span class="brand-sub">controle privado</span></span>
       </a>
-      <nav class="desktop-nav"><a href="/minha-conta.html">Minha conta</a><a href="/conteudo.html">Conteúdo</a></nav>
+      <nav class="desktop-nav"><a href="/minha-conta.html">Minha conta</a><a href="/conteudo.html">Conteúdos</a></nav>
       <div class="header-actions"><button class="button" onclick="logout()">Sair</button></div>
     </div>
   </header>
   <main class="section">
     <div class="container admin-layout">
       <section class="card">
-        <span class="badge">controle manual</span>
-        <h1 class="section-title" style="font-size:44px; margin-top:14px;">Gerencie quem entra.</h1>
-        <p class="section-copy">Aqui você encontra as contas, aprova o acesso vitalício e remove quando quiser.</p>
+        <span class="badge">painel admin</span>
+        <h1 class="section-title" style="font-size:44px; margin-top:14px;">Gerenciar acessos da Beatriz Lopes</h1>
+        <p class="section-copy">Aqui você aprova, remove e confere quem pediu o vitalício.</p>
         <form id="adminSearchForm" class="form-actions" novalidate>
-          <input id="adminSearch" type="text" placeholder="Buscar por nome ou e-mail" style="max-width:360px; width:100%; padding:16px 18px; border-radius:18px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.04); color:#fff;">
+          <input id="adminSearch" type="text" placeholder="Buscar por nome, usuário ou e-mail" style="max-width:360px; width:100%; padding:16px 18px; border-radius:18px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.04); color:#fff;">
           <button class="button" type="submit">Buscar</button>
         </form>
         <div class="message-box" data-message></div>

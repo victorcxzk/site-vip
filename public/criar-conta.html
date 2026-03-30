@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Criar conta</title>
+  <title>Criar conta • Beatriz Lopes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -13,18 +13,22 @@
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
-        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Foto principal"></span>
-        <span><span class="brand-title">Seu Espaço Privado</span><span class="brand-sub">conteúdo exclusivo</span></span>
+        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
+        <span><span class="brand-title">Beatriz Lopes</span><span class="brand-sub">privacy exclusivo 😈</span></span>
       </a>
-      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="/assinar.html">Liberar acesso</a></nav>
-      <div class="header-actions"><a class="button ghost" href="/login.html">Entrar</a></div>
+      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
+      <div class="header-actions">
+        <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
+        <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>@<span data-user-name>usuario</span></a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
     </div>
   </header>
   <main class="auth-layout">
     <div class="container auth-grid">
       <section class="glass-card form-card">
-        <h1>Crie sua conta</h1>
-        <p>Deixe seu perfil pronto para entrar no conteúdo e receber a liberação mais rápido.</p>
+        <h1>Crie sua conta 💋</h1>
+        <p>É rapidinho. Depois você já pode pedir o acesso vitalício por R$ 5,90 😈</p>
         <form id="signupForm" novalidate>
           <div class="field"><label for="nome">Seu nome</label><input id="nome" type="text" autocomplete="name"></div>
           <div class="field"><label for="email">E-mail</label><input id="email" type="email" autocomplete="email"></div>
@@ -32,17 +36,17 @@
           <div class="field"><label for="telegram">Seu Telegram (opcional)</label><input id="telegram" type="text" placeholder="seutelegram"></div>
           <div class="field"><label for="senha">Senha</label><input id="senha" type="password" autocomplete="new-password"></div>
           <div class="form-actions">
-            <button class="button" type="submit">Criar conta</button>
+            <button class="button" type="submit">Criar conta 😈</button>
             <a class="button ghost" href="/login.html">Já tenho conta</a>
           </div>
           <div class="message-box" data-message></div>
         </form>
       </section>
       <div class="auth-side">
-        <img src="/img/preview.svg" alt="Prévia do conteúdo">
+        <img src="/img/preview.svg" alt="Prévia Beatriz Lopes">
         <div class="auth-side-copy">
-          <h2>Falta pouco.</h2>
-          <p>Crie sua conta, faça login e toque em liberar acesso para concluir no Telegram e receber a aprovação manual.</p>
+          <h2>Falta pouco pra entrar no meu cantinho 😏</h2>
+          <p>Seu perfil fica salvo e você não precisa fazer tudo de novo depois.</p>
         </div>
       </div>
     </div>
