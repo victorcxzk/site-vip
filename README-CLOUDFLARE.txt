@@ -38,3 +38,4 @@ PROJETO PRONTO PARA CLOUDFLARE PAGES
 - cria registro em pagamentos com status aguardando_contato
 - abre link do Telegram
 - a assinatura só libera no admin
+
