@@ -1,218 +1,159 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Seu Espaço Privado</title>
+  <meta name="description" content="Conteúdo exclusivo, acesso vitalício e liberação rápida por apenas R$ 5,90.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-config.js"></script>
-  <script src="js/app.js" defer></script>
-
-  <title>Perfil VIP • Conteúdo exclusivo</title>
-  <meta name="description" content="Prévia elegante, acesso privado e assinatura aprovada manualmente.">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-page="home">
-  <div class="site-bg"></div>
-  <div class="site-noise"></div>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-mark"><img src="img/avatar-photo.svg" alt="Foto de perfil"></span>
-      <span class="brand-copy">
-        <strong>Seu perfil VIP</strong>
-        <span data-nav-status>Prévia aberta</span>
-      </span>
-    </a>
-
-    <div class="nav-desktop">
-      <div class="nav-links">
-        <a class="pill-button" href="index.html#previas">Prévia</a>
-        <a class="pill-button" href="assinar.html">Assinar</a>
-        <a class="pill-button" href="conteudo.html">Área privada</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/index.html" class="brand">
+        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Foto principal"></span>
+        <span>
+          <span class="brand-title">Seu Espaço Privado</span>
+          <span class="brand-sub">conteúdo exclusivo</span>
+        </span>
+      </a>
+      <nav class="desktop-nav">
+        <a href="/index.html">Início</a>
+        <a href="/assinar.html">Liberar acesso</a>
+        <a href="/conteudo.html" data-member-link>Conteúdo</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
+        <a class="button" href="/criar-conta.html" data-guest-only>Criar conta</a>
+        <a class="button ghost" href="/minha-conta.html" data-auth-only hidden><span data-user-name>Minha conta</span></a>
+        <a class="button ghost" href="/admin.html" data-admin-only hidden>Admin</a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
-      <div class="nav-user-row" data-guest-only>
-        <a class="secondary-button" href="login.html">Entrar</a>
-        <a class="button" href="criar-conta.html">Criar conta</a>
+      <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu" data-open="false">
+      <div class="mobile-menu-panel">
+        <a href="/index.html" data-close-menu>Início</a>
+        <a href="/assinar.html" data-close-menu>Liberar acesso</a>
+        <a href="/conteudo.html" data-member-link data-close-menu>Conteúdo</a>
+        <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
+        <a href="/criar-conta.html" data-guest-only data-close-menu>Criar conta</a>
+        <a href="/minha-conta.html" data-auth-only hidden data-close-menu>Minha conta</a>
+        <a href="/admin.html" data-admin-only hidden data-close-menu>Admin</a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
-      <div class="nav-user-row" data-auth-only hidden>
-        <a class="pill-button" href="minha-conta.html"><span data-user-email>Minha conta</span></a>
-        <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
-        <button class="button" type="button" onclick="logout()">Sair</button>
-      </div>
     </div>
+  </header>
 
-    <button class="mobile-toggle" type="button" aria-expanded="false" data-mobile-toggle>
-      ☰
-    </button>
-  </div>
-</nav>
-
-<div class="mobile-panel-wrap" data-mobile-menu data-open="false">
-  <div class="mobile-panel">
-    <div class="nav-links">
-      <a class="pill-button" href="index.html#previas">Prévia</a>
-      <a class="pill-button" href="assinar.html">Assinar</a>
-      <a class="pill-button" href="conteudo.html">Área privada</a>
-    </div>
-    <div class="nav-user-row" data-guest-only>
-      <a class="secondary-button" href="login.html">Entrar</a>
-      <a class="button" href="criar-conta.html">Criar conta</a>
-    </div>
-    <div class="nav-user-row" data-auth-only hidden>
-      <a class="pill-button" href="minha-conta.html"><span data-user-name>Minha conta</span></a>
-      <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
-      <button class="button" type="button" onclick="logout()">Sair</button>
-    </div>
-  </div>
-</div>
-
-
-  <main class="page-shell">
+  <main>
     <section class="hero">
-      <div class="hero-copy">
-        <div class="hero-cover"></div>
-        <div class="hero-content">
-          <span class="kicker">Acesso reservado • sem exposição desnecessária</span>
-          <h1>Fotos, bastidores e conteúdo privado para quem quiser ir além da prévia.</h1>
-          <p>Visual forte, navegação simples e o caminho direto para quem realmente quer entrar na área completa.</p>
-          <div class="button-row">
-            <a class="button" id="heroPrimary" href="assinar.html">Assinar agora</a>
-            <a class="secondary-button" id="heroSecondary" href="login.html">Entrar</a>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="badge" id="miniState">Prévia liberada</span>
+          <h1>Um espaço só seu para ver tudo sem enrolação.</h1>
+          <p>Fotos, vídeos e momentos reservados em uma área privada feita para quem quer entrar, ver e aproveitar. Um único pagamento, acesso vitalício e liberação manual para manter tudo sob controle.</p>
+          <div class="hero-actions">
+            <a class="button" href="/criar-conta.html" id="heroAction">Quero ver agora</a>
+            <a class="button ghost" href="/assinar.html">Acesso vitalício · R$ 5,90</a>
           </div>
-          <div class="flash" data-flash></div>
+          <div class="hero-proof">
+            <span>✔ acesso rápido</span>
+            <span>✔ um plano só</span>
+            <span>✔ conteúdo reservado</span>
+          </div>
         </div>
-      </div>
-
-      <div class="hero-side">
-        <article class="profile-panel hero-card">
-          <div class="profile-head">
-            <div class="avatar"><img src="img/avatar-photo.svg" alt="Foto principal"></div>
-            <div>
-              <h2 data-user-name>Seu perfil VIP</h2>
-              <p>@conteudo.reservado</p>
+        <div class="hero-card">
+          <img src="/img/hero-cover.svg" alt="Imagem principal de destaque">
+          <div class="hero-card-overlay">
+            <span class="badge" id="ctaPrice">Vitalício · R$ 5,90</span>
+            <div class="hero-mini">
+              <img src="/img/avatar-photo.svg" alt="Foto de perfil">
+              <div>
+                <strong>Seu acesso em um só lugar</strong>
+                <span>Sem mensalidade, sem complicação, sem tela fria.</span>
+              </div>
             </div>
           </div>
-          <div class="tags">
-            <span class="tag">prévia com blur</span>
-            <span class="tag">galeria privada</span>
-            <span class="tag">aprovação manual</span>
-          </div>
-          <div class="status-mini">
-            <strong id="teaserStatus">Prévia aberta</strong>
-            <p id="heroTitle">Prévia liberada. O restante fica na área privada.</p>
-            <p id="heroText">Entre ou crie sua conta para continuar e pedir o acesso completo.</p>
-          </div>
-        </article>
-
-        <article class="soft-card">
-          <h3>Chamou atenção? Então o próximo passo é simples.</h3>
-          <p>Escolha um plano, envie o pedido e finalize comigo no Telegram. A liberação é feita por mim no painel admin.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section" id="previas">
-      <div class="section-head">
-        <div>
-          <span class="kicker">Prévia</span>
-          <h2 class="section-title">Só o suficiente para deixar curiosidade.</h2>
-        </div>
-      </div>
-
-      <div class="preview-grid">
-        <article class="preview-visual">
-          <img src="img/preview.svg" alt="Prévia do conteúdo">
-          <div class="blur-overlay"></div>
-          <div class="preview-copy">
-            <h3>O que está aberto é só um teaser.</h3>
-            <p>A galeria completa fica trancada para assinantes com acesso ativo.</p>
-          </div>
-        </article>
-
-        <div class="cards-grid">
-          <article class="soft-card">
-            <h3>Mais visual, menos enrolação.</h3>
-            <p>Quem chega no site vê imagens, sente o clima e entende rápido onde clicar.</p>
-          </article>
-          <article class="soft-card">
-            <h3>Pedido manual e discreto.</h3>
-            <p>O botão de assinatura registra seu pedido e já leva direto para o Telegram.</p>
-          </article>
-          <article class="soft-card">
-            <h3>Acesso só quando eu aprovo.</h3>
-            <p>Mesmo com conta criada, a área completa só abre depois da liberação no painel.</p>
-          </article>
         </div>
       </div>
     </section>
 
-    <section class="section" id="planos">
-      <div class="section-head">
-        <div>
-          <span class="kicker">Planos</span>
-          <h2 class="section-title">Escolha como você quer entrar.</h2>
+    <section class="section">
+      <div class="container">
+        <span class="kicker">feito para vender</span>
+        <h2 class="section-title">Quem entra quer ver logo, não ler detalhes técnicos.</h2>
+        <p class="section-copy">Por isso a experiência foi refeita para ser direta: primeiro a curiosidade, depois o convite, e por fim a compra do acesso vitalício. Tudo com foco em conversão.</p>
+        <div class="grid-3" style="margin-top:26px;">
+          <div class="card value-card">
+            <h3>Entrada fácil</h3>
+            <p>Cadastro rápido, login simples e navegação limpa para a pessoa chegar no que importa sem se perder.</p>
+          </div>
+          <div class="card value-card">
+            <h3>Preço irresistível</h3>
+            <p>Um único plano de R$ 5,90 para facilitar a decisão e aumentar a chance de compra por impulso.</p>
+          </div>
+          <div class="card value-card">
+            <h3>Acesso reservado</h3>
+            <p>Quem ainda não foi liberado vê só a chamada certa para comprar. Quem já tem acesso entra direto.</p>
+          </div>
         </div>
-        <a class="secondary-button" id="homePlanCta" href="assinar.html">Continuar com Mensal VIP • R$ 49,90</a>
       </div>
+    </section>
 
-      <div class="plan-grid">
-        <button class="plan-card selected" type="button" onclick="choosePlan('Mensal VIP', 49.90, this)">
-          <div class="plan-top">
-            <div>
-              <div class="plan-name">Mensal VIP</div>
-              <p>Entrada rápida para acompanhar tudo agora.</p>
-            </div>
-            <span class="plan-badge">mais pedido</span>
+    <section class="section-tight">
+      <div class="container showcase">
+        <div class="showcase-main">
+          <img src="/img/preview.svg" alt="Prévia principal">
+          <div class="overlay-copy">
+            <h3>É só uma amostra.</h3>
+            <p>O restante fica na área privada. Se a pessoa gostou do clima da página, ela já entende o próximo passo.</p>
           </div>
-          <div class="plan-price">R$ 49,90<small>por mês</small></div>
-          <div class="check-list">
-            <span>área privada completa</span>
-            <span>galeria atualizada</span>
-            <span>acesso liberado manualmente</span>
-          </div>
-        </button>
+        </div>
+        <div class="showcase-side">
+          <div class="tile"><img src="/img/gallery-1.svg" alt="Prévia 1"></div>
+          <div class="tile"><img src="/img/gallery-2.svg" alt="Prévia 2"></div>
+        </div>
+      </div>
+    </section>
 
-        <button class="plan-card" type="button" onclick="choosePlan('Trimestral VIP', 129.90, this)">
-          <div class="plan-top">
-            <div>
-              <div class="plan-name">Trimestral VIP</div>
-              <p>Mais tempo dentro e melhor valor.</p>
-            </div>
-            <span class="plan-badge">mais tempo</span>
+    <section class="section">
+      <div class="container">
+        <span class="kicker">acesso vitalício</span>
+        <h2 class="section-title">Um plano só, uma decisão só.</h2>
+        <div class="grid-2" style="margin-top:22px;">
+          <div class="card faq-card">
+            <h3>Quanto custa?</h3>
+            <p>R$ 5,90 em pagamento único. Quem libera uma vez não precisa renovar.</p>
           </div>
-          <div class="plan-price">R$ 129,90<small>pacote</small></div>
-          <div class="check-list">
-            <span>sem precisar renovar tão cedo</span>
-            <span>conteúdo reservado</span>
-            <span>ideal para quem quer acompanhar tudo</span>
+          <div class="card faq-card">
+            <h3>Como a pessoa compra?</h3>
+            <p>Clica em liberar acesso, envia o pedido e já abre o Telegram para falar direto com você.</p>
           </div>
-        </button>
-
-        <button class="plan-card" type="button" onclick="choosePlan('Semestral VIP', 239.90, this)">
-          <div class="plan-top">
-            <div>
-              <div class="plan-name">Semestral VIP</div>
-              <p>Plano premium para ficar por mais tempo.</p>
-            </div>
-            <span class="plan-badge">premium</span>
+          <div class="card faq-card">
+            <h3>Quando entra?</h3>
+            <p>Assim que você aprovar a conta no painel, o conteúdo aparece automaticamente para ela.</p>
           </div>
-          <div class="plan-price">R$ 239,90<small>pacote</small></div>
-          <div class="check-list">
-            <span>melhor custo por período</span>
-            <span>acesso contínuo à área privada</span>
-            <span>sem pressa para renovar</span>
+          <div class="card faq-card">
+            <h3>Precisa de vários planos?</h3>
+            <p>Não. Quanto menos dúvida, mais fácil vender. Aqui fica tudo centrado em um único acesso vitalício.</p>
           </div>
-        </button>
+        </div>
       </div>
     </section>
   </main>
 
-  <div class="footer-note">Troque as imagens em <strong>img/avatar-photo.svg</strong>, <strong>img/hero-cover.svg</strong> e <strong>img/site-background.svg</strong> pelos seus arquivos.</div>
+  <footer class="site-footer">
+    <div class="container footer-box">
+      <span>Seu Espaço Privado</span>
+      <span>Direto ao ponto, bonito no celular e pronto para vender.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 </html>
-

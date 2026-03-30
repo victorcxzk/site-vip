@@ -1,107 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conteúdo</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-config.js"></script>
-  <script src="js/app.js" defer></script>
-
-  <title>Área privada • Perfil VIP</title>
+  <link rel="stylesheet" href="/css/style.css">
 </head>
-<body data-page="conteudo">
-  <div class="site-bg"></div><div class="site-noise"></div>
-
-<nav class="nav">
-  <div class="nav-inner">
-    <a class="brand" href="index.html">
-      <span class="brand-mark"><img src="img/avatar-photo.svg" alt="Foto de perfil"></span>
-      <span class="brand-copy">
-        <strong>Seu perfil VIP</strong>
-        <span data-nav-status>Prévia aberta</span>
-      </span>
-    </a>
-
-    <div class="nav-desktop">
-      <div class="nav-links">
-        <a class="pill-button" href="index.html#previas">Prévia</a>
-        <a class="pill-button" href="assinar.html">Assinar</a>
-        <a class="pill-button" href="conteudo.html">Área privada</a>
-      </div>
-      <div class="nav-user-row" data-guest-only>
-        <a class="secondary-button" href="login.html">Entrar</a>
-        <a class="button" href="criar-conta.html">Criar conta</a>
-      </div>
-      <div class="nav-user-row" data-auth-only hidden>
-        <a class="pill-button" href="minha-conta.html"><span data-user-email>Minha conta</span></a>
-        <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
-        <button class="button" type="button" onclick="logout()">Sair</button>
-      </div>
+<body data-page="content">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/index.html" class="brand">
+        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Foto principal"></span>
+        <span><span class="brand-title">Seu Espaço Privado</span><span class="brand-sub">conteúdo exclusivo</span></span>
+      </a>
+      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="/assinar.html">Liberar acesso</a></nav>
+      <div class="header-actions"><a class="button ghost" href="/minha-conta.html">Minha conta</a><button class="button" onclick="logout()">Sair</button></div>
     </div>
-
-    <button class="mobile-toggle" type="button" aria-expanded="false" data-mobile-toggle>
-      ☰
-    </button>
-  </div>
-</nav>
-
-<div class="mobile-panel-wrap" data-mobile-menu data-open="false">
-  <div class="mobile-panel">
-    <div class="nav-links">
-      <a class="pill-button" href="index.html#previas">Prévia</a>
-      <a class="pill-button" href="assinar.html">Assinar</a>
-      <a class="pill-button" href="conteudo.html">Área privada</a>
-    </div>
-    <div class="nav-user-row" data-guest-only>
-      <a class="secondary-button" href="login.html">Entrar</a>
-      <a class="button" href="criar-conta.html">Criar conta</a>
-    </div>
-    <div class="nav-user-row" data-auth-only hidden>
-      <a class="pill-button" href="minha-conta.html"><span data-user-name>Minha conta</span></a>
-      <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
-      <button class="button" type="button" onclick="logout()">Sair</button>
-    </div>
-  </div>
-</div>
-
-  <main class="page-shell">
-    <div class="content-hero">
-      <div>
-        <span class="kicker">Área privada</span>
-        <h1 class="page-title">Tudo que fica longe da prévia.</h1>
-        <p id="contentStatus">Carregando...</p>
-      </div>
-      <a class="secondary-button" href="assinar.html">Gerenciar assinatura</a>
-    </div>
-
-    <section id="lockedArea">
-      <div class="locked-banner soft-card">
-        <h3>A prévia está aberta. O restante ainda não.</h3>
-        <p>Sua conta existe, mas a assinatura ainda não foi liberada. Envie o pedido e finalize comigo no Telegram.</p>
-        <div class="button-row">
-          <a class="button" href="assinar.html">Enviar pedido</a>
-          <a class="secondary-button" href="minha-conta.html">Minha conta</a>
+  </header>
+  <main class="section">
+    <div class="container member-layout">
+      <section class="content-box card" id="contentArea" hidden>
+        <span class="badge">área liberada</span>
+        <h2>Bem-vindo, <span id="contentBuyerName">você</span>.</h2>
+        <p>Agora sim. Aqui a pessoa para de só imaginar e começa a aproveitar o que realmente queria ver.</p>
+        <div class="content-gallery">
+          <img src="/img/gallery-1.svg" alt="Conteúdo 1">
+          <img src="/img/gallery-2.svg" alt="Conteúdo 2">
+          <img src="/img/gallery-3.svg" alt="Conteúdo 3">
         </div>
-      </div>
-      <div class="gallery-grid section">
-        <article class="gallery-card"><img src="img/gallery-1.svg" alt="Prévia 1"><div class="blur-overlay"></div><div class="caption">Prévia fechada</div></article>
-        <article class="gallery-card"><img src="img/gallery-2.svg" alt="Prévia 2"><div class="blur-overlay"></div><div class="caption">Prévia fechada</div></article>
-        <article class="gallery-card"><img src="img/gallery-3.svg" alt="Prévia 3"><div class="blur-overlay"></div><div class="caption">Prévia fechada</div></article>
-      </div>
-    </section>
-
-    <section id="unlockedArea" hidden>
-      <div class="gallery-grid">
-        <article class="gallery-card"><img src="img/gallery-1.svg" alt="Galeria 1"><div class="caption">Look reservado • parte 1</div></article>
-        <article class="gallery-card"><img src="img/gallery-2.svg" alt="Galeria 2"><div class="caption">Look reservado • parte 2</div></article>
-        <article class="gallery-card"><img src="img/gallery-3.svg" alt="Galeria 3"><div class="caption">Look reservado • parte 3</div></article>
-      </div>
-    </section>
+        <div class="content-story">
+          <strong>Mensagem exclusiva</strong>
+          <p>Você pode usar este espaço para textos, avisos especiais, bônus, bastidores ou para soltar novas fotos e vídeos a qualquer momento.</p>
+        </div>
+      </section>
+      <section class="content-locked" id="accessGate">
+        <img src="/img/hero-cover.svg" alt="Prévia do conteúdo">
+        <div class="veil"></div>
+        <div class="content-locked-copy">
+          <h3>Seu acesso ainda não foi liberado.</h3>
+          <p>Toque em liberar acesso, envie o pedido e finalize no Telegram. Assim que a sua conta for aprovada, esta área abre sozinha.</p>
+          <div class="form-actions" style="margin-top:18px;">
+            <a class="button" href="/assinar.html">Liberar agora</a>
+            <a class="button ghost" href="/minha-conta.html">Minha conta</a>
+          </div>
+        </div>
+      </section>
+    </div>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/app.js"></script>
 </body>
 </html>

@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1000" viewBox="0 0 1400 1000"><defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#1f1031"/><stop offset="1" stop-color="#090611"/></linearGradient><linearGradient id="sil" x1="0" x2="1"><stop stop-color="#ff3fa4"/><stop offset="1" stop-color="#8a3ffc"/></linearGradient></defs><rect width="1400" height="1000" fill="url(#bg)"/><circle cx="1080" cy="280" r="240" fill="#ff3fa4" fill-opacity=".18"/><circle cx="250" cy="200" r="200" fill="#8a3ffc" fill-opacity=".18"/><path d="M770 780c-26-160-96-236-174-236-78 0-148 76-174 236" fill="url(#sil)" fill-opacity=".7"/><circle cx="596" cy="370" r="120" fill="url(#sil)" fill-opacity=".84"/><text x="116" y="880" fill="#f7efff" font-size="54" font-family="Inter,Arial">troque por sua imagem principal</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#1a0f29"/><stop offset="1" stop-color="#2b1145"/></linearGradient>
+    <linearGradient id="skin" x1="0" x2="1"><stop stop-color="#ff7bc9"/><stop offset="1" stop-color="#a55cff"/></linearGradient>
+  </defs>
+  <rect width="1200" height="1500" fill="url(#bg)"/>
+  <circle cx="650" cy="460" r="220" fill="url(#skin)" opacity=".9"/>
+  <rect x="340" y="710" width="540" height="520" rx="220" fill="url(#skin)"/>
+  <circle cx="340" cy="350" r="180" fill="#ff4fd8" opacity=".2"/>
+  <circle cx="900" cy="1040" r="250" fill="#8f49ff" opacity=".18"/>
+  <text x="50%" y="1390" fill="#fff" font-size="54" text-anchor="middle" font-family="Arial">substitua esta capa pela sua imagem</text>
+</svg>

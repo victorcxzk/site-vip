@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900"><defs><linearGradient id="a" x1="0" x2="1"><stop stop-color="#ff3fa4"/><stop offset="1" stop-color="#8a3ffc"/></linearGradient></defs><rect width="1200" height="900" fill="#1a1028"/><circle cx="290" cy="230" r="160" fill="#ffffff" fill-opacity=".06"/><rect x="690" y="120" width="280" height="560" rx="140" fill="url(#a)" fill-opacity=".75"/><rect x="280" y="220" width="240" height="440" rx="120" fill="url(#a)" fill-opacity=".45"/><text x="70" y="840" fill="#f7efff" font-size="44" font-family="Inter,Arial">prévia / troque pela sua imagem</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500">
+  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#2c103f"/><stop offset="1" stop-color="#160b21"/></linearGradient></defs>
+  <rect width="1200" height="1500" fill="url(#g)"/>
+  <path d="M420 360c0-120 80-200 180-200s180 80 180 200-80 220-180 220-180-100-180-220Z" fill="#ff6fd4" opacity=".88"/>
+  <path d="M250 1140c40-220 190-340 350-340s310 120 350 340" fill="#9d68ff" opacity=".9"/>
+  <text x="50%" y="1410" fill="#fff" font-size="52" text-anchor="middle" font-family="Arial">troque por sua prévia</text>
+</svg>
