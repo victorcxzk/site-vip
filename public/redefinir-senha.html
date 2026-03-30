@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/app.js" defer></script>
+
+  <title>Recuperar senha • Perfil VIP</title>
+</head>
+<body>
+  <div class="site-bg"></div><div class="site-noise"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><img src="img/avatar-photo.svg" alt="Foto de perfil"></span>
+      <span class="brand-copy">
+        <strong>Seu perfil VIP</strong>
+        <span data-nav-status>Prévia aberta</span>
+      </span>
+    </a>
+
+    <div class="nav-desktop">
+      <div class="nav-links">
+        <a class="pill-button" href="index.html#previas">Prévia</a>
+        <a class="pill-button" href="assinar.html">Assinar</a>
+        <a class="pill-button" href="conteudo.html">Área privada</a>
+      </div>
+      <div class="nav-user-row" data-guest-only>
+        <a class="secondary-button" href="login.html">Entrar</a>
+        <a class="button" href="criar-conta.html">Criar conta</a>
+      </div>
+      <div class="nav-user-row" data-auth-only hidden>
+        <a class="pill-button" href="minha-conta.html"><span data-user-email>Minha conta</span></a>
+        <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
+        <button class="button" type="button" onclick="logout()">Sair</button>
+      </div>
+    </div>
+
+    <button class="mobile-toggle" type="button" aria-expanded="false" data-mobile-toggle>
+      ☰
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-panel-wrap" data-mobile-menu data-open="false">
+  <div class="mobile-panel">
+    <div class="nav-links">
+      <a class="pill-button" href="index.html#previas">Prévia</a>
+      <a class="pill-button" href="assinar.html">Assinar</a>
+      <a class="pill-button" href="conteudo.html">Área privada</a>
+    </div>
+    <div class="nav-user-row" data-guest-only>
+      <a class="secondary-button" href="login.html">Entrar</a>
+      <a class="button" href="criar-conta.html">Criar conta</a>
+    </div>
+    <div class="nav-user-row" data-auth-only hidden>
+      <a class="pill-button" href="minha-conta.html"><span data-user-name>Minha conta</span></a>
+      <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
+      <button class="button" type="button" onclick="logout()">Sair</button>
+    </div>
+  </div>
+</div>
+
+  <main class="page-shell auth-shell">
+    <article class="form-card" id="resetRequestCard">
+      <span class="kicker">Recuperar senha</span>
+      <h1 class="page-title">Receba um link no seu e-mail.</h1>
+      <form id="resetRequestForm">
+        <label>E-mail<input type="email" id="email" required></label>
+        <button class="button" type="submit">Enviar link</button>
+      </form>
+      <div class="flash" data-flash></div>
+    </article>
+
+    <article class="form-card section">
+      <h3>Chegou pelo link?</h3>
+      <form id="updatePasswordForm">
+        <label>Nova senha<input type="password" id="senha" required></label>
+        <label>Confirmar senha<input type="password" id="confirmarSenha" required></label>
+        <button class="button" type="submit">Atualizar senha</button>
+      </form>
+    </article>
+  </main>
+</body>
+</html>

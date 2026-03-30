@@ -1,0 +1,15 @@
+{
+  "name": "perfil-vip-cloudflare-pages",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler pages dev .",
+    "deploy": "wrangler pages deploy ."
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.53.0"
+  },
+  "devDependencies": {
+    "wrangler": "^4.11.1"
+  }
+}

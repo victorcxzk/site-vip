@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/app.js" defer></script>
+
+  <title>Admin • Perfil VIP</title>
+</head>
+<body data-page="admin">
+  <div class="site-bg"></div><div class="site-noise"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><img src="img/avatar-photo.svg" alt="Foto de perfil"></span>
+      <span class="brand-copy">
+        <strong>Seu perfil VIP</strong>
+        <span data-nav-status>Prévia aberta</span>
+      </span>
+    </a>
+
+    <div class="nav-desktop">
+      <div class="nav-links">
+        <a class="pill-button" href="index.html#previas">Prévia</a>
+        <a class="pill-button" href="assinar.html">Assinar</a>
+        <a class="pill-button" href="conteudo.html">Área privada</a>
+      </div>
+      <div class="nav-user-row" data-guest-only>
+        <a class="secondary-button" href="login.html">Entrar</a>
+        <a class="button" href="criar-conta.html">Criar conta</a>
+      </div>
+      <div class="nav-user-row" data-auth-only hidden>
+        <a class="pill-button" href="minha-conta.html"><span data-user-email>Minha conta</span></a>
+        <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
+        <button class="button" type="button" onclick="logout()">Sair</button>
+      </div>
+    </div>
+
+    <button class="mobile-toggle" type="button" aria-expanded="false" data-mobile-toggle>
+      ☰
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-panel-wrap" data-mobile-menu data-open="false">
+  <div class="mobile-panel">
+    <div class="nav-links">
+      <a class="pill-button" href="index.html#previas">Prévia</a>
+      <a class="pill-button" href="assinar.html">Assinar</a>
+      <a class="pill-button" href="conteudo.html">Área privada</a>
+    </div>
+    <div class="nav-user-row" data-guest-only>
+      <a class="secondary-button" href="login.html">Entrar</a>
+      <a class="button" href="criar-conta.html">Criar conta</a>
+    </div>
+    <div class="nav-user-row" data-auth-only hidden>
+      <a class="pill-button" href="minha-conta.html"><span data-user-name>Minha conta</span></a>
+      <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
+      <button class="button" type="button" onclick="logout()">Sair</button>
+    </div>
+  </div>
+</div>
+
+  <main class="page-shell">
+    <section class="admin-card-shell">
+      <span class="kicker">Admin</span>
+      <h1 class="page-title">Controle de assinaturas e pedidos</h1>
+      <p class="lead">Somente a conta admin vê esta página. A partir daqui você ativa, remove e acompanha pedidos dos usuários.</p>
+      <div class="admin-toolbar">
+        <input type="search" id="adminSearch" placeholder="Buscar por nome, e-mail ou @usuário">
+        <button class="secondary-button" type="button" onclick="loadAdmin()">Atualizar</button>
+      </div>
+      <div id="adminUsers" class="admin-list"></div>
+    </section>
+  </main>
+</body>
+</html>

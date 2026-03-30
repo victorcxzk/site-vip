@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/app.js" defer></script>
+
+  <title>Área privada • Perfil VIP</title>
+</head>
+<body data-page="conteudo">
+  <div class="site-bg"></div><div class="site-noise"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="index.html">
+      <span class="brand-mark"><img src="img/avatar-photo.svg" alt="Foto de perfil"></span>
+      <span class="brand-copy">
+        <strong>Seu perfil VIP</strong>
+        <span data-nav-status>Prévia aberta</span>
+      </span>
+    </a>
+
+    <div class="nav-desktop">
+      <div class="nav-links">
+        <a class="pill-button" href="index.html#previas">Prévia</a>
+        <a class="pill-button" href="assinar.html">Assinar</a>
+        <a class="pill-button" href="conteudo.html">Área privada</a>
+      </div>
+      <div class="nav-user-row" data-guest-only>
+        <a class="secondary-button" href="login.html">Entrar</a>
+        <a class="button" href="criar-conta.html">Criar conta</a>
+      </div>
+      <div class="nav-user-row" data-auth-only hidden>
+        <a class="pill-button" href="minha-conta.html"><span data-user-email>Minha conta</span></a>
+        <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
+        <button class="button" type="button" onclick="logout()">Sair</button>
+      </div>
+    </div>
+
+    <button class="mobile-toggle" type="button" aria-expanded="false" data-mobile-toggle>
+      ☰
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-panel-wrap" data-mobile-menu data-open="false">
+  <div class="mobile-panel">
+    <div class="nav-links">
+      <a class="pill-button" href="index.html#previas">Prévia</a>
+      <a class="pill-button" href="assinar.html">Assinar</a>
+      <a class="pill-button" href="conteudo.html">Área privada</a>
+    </div>
+    <div class="nav-user-row" data-guest-only>
+      <a class="secondary-button" href="login.html">Entrar</a>
+      <a class="button" href="criar-conta.html">Criar conta</a>
+    </div>
+    <div class="nav-user-row" data-auth-only hidden>
+      <a class="pill-button" href="minha-conta.html"><span data-user-name>Minha conta</span></a>
+      <a class="pill-button" data-admin-only hidden href="admin.html">Admin</a>
+      <button class="button" type="button" onclick="logout()">Sair</button>
+    </div>
+  </div>
+</div>
+
+  <main class="page-shell">
+    <div class="content-hero">
+      <div>
+        <span class="kicker">Área privada</span>
+        <h1 class="page-title">Tudo que fica longe da prévia.</h1>
+        <p id="contentStatus">Carregando...</p>
+      </div>
+      <a class="secondary-button" href="assinar.html">Gerenciar assinatura</a>
+    </div>
+
+    <section id="lockedArea">
+      <div class="locked-banner soft-card">
+        <h3>A prévia está aberta. O restante ainda não.</h3>
+        <p>Sua conta existe, mas a assinatura ainda não foi liberada. Envie o pedido e finalize comigo no Telegram.</p>
+        <div class="button-row">
+          <a class="button" href="assinar.html">Enviar pedido</a>
+          <a class="secondary-button" href="minha-conta.html">Minha conta</a>
+        </div>
+      </div>
+      <div class="gallery-grid section">
+        <article class="gallery-card"><img src="img/gallery-1.svg" alt="Prévia 1"><div class="blur-overlay"></div><div class="caption">Prévia fechada</div></article>
+        <article class="gallery-card"><img src="img/gallery-2.svg" alt="Prévia 2"><div class="blur-overlay"></div><div class="caption">Prévia fechada</div></article>
+        <article class="gallery-card"><img src="img/gallery-3.svg" alt="Prévia 3"><div class="blur-overlay"></div><div class="caption">Prévia fechada</div></article>
+      </div>
+    </section>
+
+    <section id="unlockedArea" hidden>
+      <div class="gallery-grid">
+        <article class="gallery-card"><img src="img/gallery-1.svg" alt="Galeria 1"><div class="caption">Look reservado • parte 1</div></article>
+        <article class="gallery-card"><img src="img/gallery-2.svg" alt="Galeria 2"><div class="caption">Look reservado • parte 2</div></article>
+        <article class="gallery-card"><img src="img/gallery-3.svg" alt="Galeria 3"><div class="caption">Look reservado • parte 3</div></article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
