@@ -14,14 +14,44 @@
     <div class="container header-inner">
       <a href="/index.html" class="brand">
         <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
-        <span><span class="brand-title">Beatriz Lopes</span><span class="brand-sub">privacy exclusivo 😈</span></span>
+        <span>
+          <span class="brand-title">Beatriz Lopes</span>
+          <span class="brand-sub">privacy exclusivo 😈</span>
+        </span>
       </a>
-      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="/assinar.html">Assinar</a><a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
-      <div class="header-actions"><a class="button ghost header-user" href="/minha-conta.html">@<span data-user-name>usuario</span></a><button class="button" onclick="logout()">Sair</button></div>
+      <nav class="desktop-nav">
+        <a href="/index.html">Início</a>
+        <a href="/assinar.html">Assinar</a>
+        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
+        <a class="button" href="/criar-conta.html" data-guest-only>Criar conta</a>
+        <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
+          <span class="header-user-label">@<span data-user-name>usuario</span></span>
+        </a>
+        <a class="button ghost" href="/admin.html" data-admin-only hidden>Admin</a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
+      <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu" data-open="false">
+      <div class="mobile-menu-panel">
+        <a href="/index.html" data-close-menu>Início</a>
+        <a href="/assinar.html" data-close-menu>Assinar</a>
+        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer" data-close-menu>Instagram</a>
+        <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
+        <a href="/criar-conta.html" data-guest-only data-close-menu>Criar conta</a>
+        <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
+        <a href="/admin.html" data-admin-only hidden data-close-menu>Admin</a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
     </div>
   </header>
+
   <main class="section">
     <div class="container member-layout">
+      <!-- Conteúdo liberado — visível só se assinante = true -->
       <section class="content-box card" id="contentArea" hidden>
         <span class="badge">acesso liberado 😈</span>
         <h2>Oi, <span id="contentBuyerName">você</span> 💋</h2>
@@ -32,10 +62,12 @@
           <img src="/img/gallery-3.svg" alt="Conteúdo 3">
         </div>
         <div class="content-story">
-          <strong>Recadinho especial 😏</strong>
-          <p>Você pode trocar essas imagens pelos seus arquivos reais e ir soltando novidades, packs e mensagens especiais sempre que quiser.</p>
+          <strong>Novidades chegando 😏</strong>
+          <p>Me chama no Telegram pra saber tudo em primeira mão. Fico esperando 💋</p>
         </div>
       </section>
+
+      <!-- Bloqueio — aparece se não for assinante -->
       <section class="content-locked" id="accessGate">
         <img src="/img/hero-cover.svg" alt="Prévia Beatriz Lopes">
         <div class="veil"></div>
@@ -50,6 +82,14 @@
       </section>
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-box">
+      <span>Beatriz Lopes 😈</span>
+      <span>Instagram: @lopes.beeatrizz • Telegram: @talespwk</span>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/app.js"></script>

@@ -14,27 +14,72 @@
     <div class="container header-inner">
       <a href="/index.html" class="brand">
         <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
-        <span><span class="brand-title">Beatriz Lopes</span><span class="brand-sub">privacy exclusivo 😈</span></span>
+        <span>
+          <span class="brand-title">Beatriz Lopes</span>
+          <span class="brand-sub">privacy exclusivo 😈</span>
+        </span>
       </a>
-      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="/conteudo.html" data-member-link>Conteúdos</a><a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
-      <div class="header-actions"><a class="button ghost" href="/admin.html" data-admin-only hidden>Admin</a><button class="button" onclick="logout()">Sair</button></div>
+      <nav class="desktop-nav">
+        <a href="/index.html">Início</a>
+        <a href="/conteudo.html" data-member-link>Conteúdos</a>
+        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
+        <a class="button" href="/criar-conta.html" data-guest-only>Criar conta</a>
+        <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
+          <span class="header-user-label">@<span data-user-name>usuario</span></span>
+        </a>
+        <a class="button ghost" href="/admin.html" data-admin-only hidden>Admin</a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
+      <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu" data-open="false">
+      <div class="mobile-menu-panel">
+        <a href="/index.html" data-close-menu>Início</a>
+        <a href="/conteudo.html" data-member-link data-close-menu>Conteúdos</a>
+        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer" data-close-menu>Instagram</a>
+        <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
+        <a href="/criar-conta.html" data-guest-only data-close-menu>Criar conta</a>
+        <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
+        <a href="/admin.html" data-admin-only hidden data-close-menu>Admin</a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
     </div>
   </header>
+
   <main class="section">
     <div class="container member-layout">
       <section class="member-box card">
-        <span class="badge" id="memberStatus">Seu acesso ainda não foi liberado</span>
+        <span class="badge" id="memberStatus">Carregando...</span>
         <h2>Sua conta 💖</h2>
         <p>Deixa tudo certinho e acompanha seu pedido por aqui.</p>
         <form id="accountForm" novalidate>
-          <div class="field"><label for="nome">Nome</label><input id="nome" type="text"></div>
-          <div class="field"><label for="usuario">Usuário</label><input id="usuario" type="text"></div>
-          <div class="field"><label for="telegram">Telegram</label><input id="telegram" type="text"></div>
-          <div class="field"><label for="bio">Recadinho</label><textarea id="bio" rows="4" placeholder="Se quiser, deixa um recado aqui 😏"></textarea></div>
-          <div class="form-actions"><button class="button" type="submit">Salvar</button><a class="button ghost" href="/assinar.html">Liberar acesso</a></div>
+          <div class="field">
+            <label for="nome">Nome</label>
+            <input id="nome" type="text" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="usuario">Usuário</label>
+            <input id="usuario" type="text" placeholder="seuusuario">
+          </div>
+          <div class="field">
+            <label for="telegram">Telegram</label>
+            <input id="telegram" type="text" placeholder="seutelegram">
+          </div>
+          <div class="field">
+            <label for="bio">Recadinho</label>
+            <textarea id="bio" rows="4" placeholder="Se quiser, deixa um recado aqui 😏"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="button" type="submit">Salvar</button>
+            <a class="button ghost" href="/assinar.html">Liberar acesso</a>
+          </div>
           <div class="message-box" data-message></div>
         </form>
       </section>
+
       <section class="member-box card">
         <h2>Seu pedido 😈</h2>
         <p>Quando você pedir o acesso, o andamento aparece aqui.</p>
@@ -42,6 +87,14 @@
       </section>
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-box">
+      <span>Beatriz Lopes 😈</span>
+      <span>Instagram: @lopes.beeatrizz • Telegram: @talespwk</span>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/app.js"></script>

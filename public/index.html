@@ -11,32 +11,44 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-page="home">
+
+  <!-- ══════════════ HEADER ══════════════ -->
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
-        <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
+        <span class="brand-badge">
+          <img src="/img/avatar-photo.svg" alt="Beatriz Lopes">
+        </span>
         <span>
           <span class="brand-title">Beatriz Lopes</span>
           <span class="brand-sub">privacy exclusivo 😈</span>
         </span>
       </a>
+
       <nav class="desktop-nav">
         <a href="/index.html">Início</a>
         <a href="/assinar.html">Assinar</a>
         <a href="/conteudo.html" data-member-link>Conteúdos</a>
         <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a>
       </nav>
+
       <div class="header-actions">
+        <!-- Visitante -->
         <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
-        <a class="button" href="/criar-conta.html" data-guest-only>Criar conta</a>
+        <a class="button"       href="/criar-conta.html" data-guest-only>Criar conta</a>
+        <!-- Logado -->
         <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
           <span class="header-user-label">@<span data-user-name>usuario</span></span>
         </a>
         <a class="button ghost" href="/admin.html" data-admin-only hidden>Admin</a>
         <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
-      <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+
+      <button class="menu-toggle" id="mobileMenuToggle"
+              aria-expanded="false" aria-controls="mobileMenu">Menu</button>
     </div>
+
+    <!-- Menu mobile -->
     <div class="container mobile-menu" id="mobileMenu" data-open="false">
       <div class="mobile-menu-panel">
         <a href="/index.html" data-close-menu>Início</a>
@@ -52,16 +64,30 @@
     </div>
   </header>
 
+  <!-- ══════════════ MAIN ══════════════ -->
   <main>
+
+    <!-- HERO -->
     <section class="hero hero-brand">
       <div class="container hero-grid">
         <div class="hero-copy">
           <span class="badge" id="miniState">Prévia livre 🔥</span>
-          <h1>Privacy da <span class="text-brand">Beatriz Lopes</span> com acesso vitalício por <span class="text-brand">R$ 5,90</span> 😈</h1>
-          <p>Fotos e vídeos mais quentes, chamadas no privado e uma área reservada que não vai pro Instagram. Entrou uma vez, ficou com acesso pra sempre 💋</p>
+          <h1>
+            Privacy da <span class="text-brand">Beatriz Lopes</span>
+            com acesso vitalício por <span class="text-brand">R$ 5,90</span> 😈
+          </h1>
+          <p>
+            Fotos e vídeos mais quentes, chamadas no privado e uma área reservada
+            que não vai pro Instagram. Entrou uma vez, ficou com acesso pra sempre 💋
+          </p>
           <div class="hero-actions">
-            <a class="button" href="/assinar.html" id="heroAction">Quero meu acesso agora 😈</a>
-            <a class="button ghost" href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Ver Instagram 💖</a>
+            <a class="button" href="/assinar.html" id="heroAction">
+              Quero meu acesso agora 😈
+            </a>
+            <a class="button ghost" href="https://instagram.com/lopes.beeatrizz"
+               target="_blank" rel="noopener noreferrer">
+              Ver Instagram 💖
+            </a>
           </div>
           <div class="hero-proof">
             <span>🔥 acesso vitalício</span>
@@ -69,6 +95,7 @@
             <span>😈 conteúdo privado</span>
           </div>
         </div>
+
         <div class="hero-card">
           <img src="/img/hero-cover.svg" alt="Capa Beatriz Lopes">
           <div class="hero-card-overlay">
@@ -85,6 +112,7 @@
       </div>
     </section>
 
+    <!-- PRÉVIA -->
     <section class="section-tight">
       <div class="container showcase">
         <div class="showcase-main">
@@ -101,10 +129,13 @@
       </div>
     </section>
 
+    <!-- VALORES -->
     <section class="section">
       <div class="container">
         <span class="kicker">porque vale a pena</span>
-        <h2 class="section-title">Um valor baixinho pra entrar e ver tudo sem frescura 🔥</h2>
+        <h2 class="section-title">
+          Um valor baixinho pra entrar e ver tudo sem frescura 🔥
+        </h2>
         <div class="grid-3" style="margin-top:26px;">
           <div class="card value-card">
             <h3>Conteúdo que esquenta 😈</h3>
@@ -112,20 +143,23 @@
           </div>
           <div class="card value-card">
             <h3>Preço que dá vontade</h3>
-            <p>Só R$ 5,90 no plano vitalício. Pagou uma vez, o acesso fica liberado.</p>
+            <p>Só R$ 5,90 no plano vitalício. Pagou uma vez, o acesso fica liberado pra sempre.</p>
           </div>
           <div class="card value-card">
             <h3>Fala direto comigo 💬</h3>
-            <p>Depois do pedido, o Telegram já abre pra você agilizar sua entrada rapidinho.</p>
+            <p>Depois do pedido, o Telegram já abre pra você entrar em contato e agilizar tudo.</p>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- FAQ -->
     <section class="section">
       <div class="container">
         <span class="kicker">do jeitinho que gostam</span>
-        <h2 class="section-title">Sem mensalidade, sem vários planos, sem enrolação 💖</h2>
+        <h2 class="section-title">
+          Sem mensalidade, sem vários planos, sem enrolação 💖
+        </h2>
         <div class="grid-2" style="margin-top:22px;">
           <div class="card faq-card">
             <h3>Quanto custa?</h3>
@@ -141,13 +175,35 @@
           </div>
           <div class="card faq-card">
             <h3>Onde eu vejo mais?</h3>
-            <p>Tem Instagram também: <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">@lopes.beeatrizz</a></p>
+            <p>
+              Tem Instagram também:
+              <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">
+                @lopes.beeatrizz
+              </a>
+            </p>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- CTA FINAL -->
+    <section class="section" style="padding-bottom:100px;">
+      <div class="container" style="text-align:center; max-width:640px;">
+        <span class="kicker">bora logo</span>
+        <h2 class="section-title">Ainda não entrou? 👀</h2>
+        <p class="section-copy" style="margin:0 auto 30px;">
+          Só R$ 5,90 pra ver tudo de uma vez. Sem surpresa, sem renovação.
+          Uma vez dentro, tá dentro pra sempre 😈
+        </p>
+        <a class="button" href="/assinar.html" style="font-size:18px; padding:18px 36px;">
+          Quero entrar agora 🔥
+        </a>
+      </div>
+    </section>
+
   </main>
 
+  <!-- ══════════════ FOOTER ══════════════ -->
   <footer class="site-footer">
     <div class="container footer-box">
       <span>Beatriz Lopes 😈</span>

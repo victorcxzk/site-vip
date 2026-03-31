@@ -14,18 +14,45 @@
     <div class="container header-inner">
       <a href="/index.html" class="brand">
         <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
-        <span><span class="brand-title">Beatriz Lopes</span><span class="brand-sub">privacy exclusivo 😈</span></span>
+        <span>
+          <span class="brand-title">Beatriz Lopes</span>
+          <span class="brand-sub">privacy exclusivo 😈</span>
+        </span>
       </a>
-      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="/conteudo.html" data-member-link>Conteúdos</a><a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
+      <nav class="desktop-nav">
+        <a href="/index.html">Início</a>
+        <a href="/conteudo.html" data-member-link>Conteúdos</a>
+        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
       <div class="header-actions">
         <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
-        <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>@<span data-user-name>usuario</span></a>
+        <a class="button" href="/criar-conta.html" data-guest-only>Criar conta</a>
+        <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
+          <span class="header-user-label">@<span data-user-name>usuario</span></span>
+        </a>
+        <a class="button ghost" href="/admin.html" data-admin-only hidden>Admin</a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
+      <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu" data-open="false">
+      <div class="mobile-menu-panel">
+        <a href="/index.html" data-close-menu>Início</a>
+        <a href="/conteudo.html" data-member-link data-close-menu>Conteúdos</a>
+        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer" data-close-menu>Instagram</a>
+        <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
+        <a href="/criar-conta.html" data-guest-only data-close-menu>Criar conta</a>
+        <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
+        <a href="/admin.html" data-admin-only hidden data-close-menu>Admin</a>
         <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
     </div>
   </header>
+
   <main class="section">
     <div class="container plan-wrap">
+
+      <!-- Card do plano -->
       <section class="plan-card" id="planCard">
         <span class="badge">plano único 😈</span>
         <h1 data-plan-name>Vitalício</h1>
@@ -35,28 +62,60 @@
           <li>Conteúdos mais quentes 😈</li>
           <li>Área privada exclusiva 🔥</li>
           <li>Contato direto no Telegram 💬</li>
-          <li>Pagamento único 💖</li>
+          <li>Pagamento único, sem mensalidade 💖</li>
         </ul>
-        <div class="notice" id="alreadyActive" hidden>Seu acesso já está liberado 😈</div>
+        <div class="notice" id="alreadyActive" hidden>
+          Seu acesso já está liberado 😈 Aproveita!
+        </div>
       </section>
+
+      <!-- Área de ação -->
       <section>
         <span class="kicker">liberar acesso</span>
-        <h2 class="section-title" style="font-size:42px;">Oi, <span id="buyerName">linda</span> 💋</h2>
-        <p class="section-copy">Toca no botão e eu já recebo seu pedido. Depois o Telegram abre pra você me chamar direto e agilizar tudo 🔥</p>
+        <h2 class="section-title" style="font-size:42px;">
+          Oi, <span id="buyerName">linda</span> 💋
+        </h2>
+        <p class="section-copy">
+          Toca no botão e eu já recebo seu pedido. Depois o Telegram abre pra você me chamar
+          direto e a gente resolve rapidinho 🔥
+        </p>
+
         <div class="steps" style="margin-top:22px;">
-          <div class="step"><strong>1. Envia o pedido</strong><p>Sua conta já fica marcada certinho.</p></div>
-          <div class="step"><strong>2. Abre o Telegram</strong><p>Você fala comigo em um toque.</p></div>
-          <div class="step"><strong>3. Eu libero</strong><p>E o seu acesso aparece na hora 😈</p></div>
+          <div class="step">
+            <strong>1. Envia o pedido</strong>
+            <p>Sua conta fica marcada na fila certinho.</p>
+          </div>
+          <div class="step">
+            <strong>2. Abre o Telegram</strong>
+            <p>Você me chama em um toque, sem complicação.</p>
+          </div>
+          <div class="step">
+            <strong>3. Eu libero</strong>
+            <p>E o seu acesso aparece na hora 😈</p>
+          </div>
         </div>
+
         <div class="form-actions" style="margin-top:26px;">
-          <button class="button" id="buyButton">Quero meu acesso por R$ 5,90 😈</button>
+          <button class="button" id="buyButton">
+            Quero meu acesso por R$ 5,90 😈
+          </button>
           <a class="button ghost" href="/conteudo.html">Ver prévia</a>
         </div>
-        <div class="price-note">Plano vitalício • R$ 5,90 • Telegram @talespwk</div>
+
+        <p class="price-note">Plano vitalício • R$ 5,90 • Telegram @talespwk</p>
         <div class="message-box" data-message></div>
       </section>
+
     </div>
   </main>
+
+  <footer class="site-footer">
+    <div class="container footer-box">
+      <span>Beatriz Lopes 😈</span>
+      <span>Instagram: @lopes.beeatrizz • Telegram: @talespwk</span>
+    </div>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/app.js"></script>

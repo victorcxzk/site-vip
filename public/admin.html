@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Admin • Beatriz Lopes</title>
+  <title>Painel • Beatriz Lopes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,29 +14,50 @@
     <div class="container header-inner">
       <a href="/index.html" class="brand">
         <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
-        <span><span class="brand-title">Beatriz Lopes</span><span class="brand-sub">controle privado</span></span>
+        <span>
+          <span class="brand-title">Beatriz Lopes</span>
+          <span class="brand-sub">painel privado</span>
+        </span>
       </a>
-      <nav class="desktop-nav"><a href="/minha-conta.html">Minha conta</a><a href="/conteudo.html">Conteúdos</a></nav>
-      <div class="header-actions"><button class="button" onclick="logout()">Sair</button></div>
+      <nav class="desktop-nav">
+        <a href="/index.html">Início</a>
+        <a href="/minha-conta.html">Minha conta</a>
+      </nav>
+      <div class="header-actions">
+        <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
+          @<span data-user-name>usuario</span>
+        </a>
+        <button class="button" onclick="logout()">Sair</button>
+      </div>
     </div>
   </header>
+
   <main class="section">
     <div class="container admin-layout">
       <section class="card">
-        <span class="badge">painel admin</span>
-        <h1 class="section-title" style="font-size:44px; margin-top:14px;">Gerenciar acessos da Beatriz Lopes</h1>
-        <p class="section-copy">Aqui você aprova, remove e confere quem pediu o vitalício.</p>
+        <span class="badge">painel de controle</span>
+        <h1 class="section-title" style="font-size:40px; margin-top:14px;">Gerenciar acessos</h1>
+        <p class="section-copy">Aprova, remove e acompanha quem pediu o vitalício.</p>
         <form id="adminSearchForm" class="form-actions" novalidate>
-          <input id="adminSearch" type="text" placeholder="Buscar por nome, usuário ou e-mail" style="max-width:360px; width:100%; padding:16px 18px; border-radius:18px; border:1px solid rgba(255,255,255,0.12); background:rgba(255,255,255,0.04); color:#fff;">
+          <input
+            id="adminSearch"
+            type="text"
+            placeholder="Buscar por nome, usuário ou e-mail"
+            style="max-width:360px;width:100%;padding:16px 18px;border-radius:18px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;"
+          >
           <button class="button" type="submit">Buscar</button>
         </form>
         <div class="message-box" data-message></div>
       </section>
+
       <section class="card">
-        <div id="adminUsers"></div>
+        <div id="adminUsers">
+          <div class="empty-state">Carregando...</div>
+        </div>
       </section>
     </div>
   </main>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/app.js"></script>

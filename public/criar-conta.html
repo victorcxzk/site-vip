@@ -9,32 +9,66 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body>
+<body data-page="signup">
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
         <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
-        <span><span class="brand-title">Beatriz Lopes</span><span class="brand-sub">privacy exclusivo 😈</span></span>
+        <span>
+          <span class="brand-title">Beatriz Lopes</span>
+          <span class="brand-sub">privacy exclusivo 😈</span>
+        </span>
       </a>
-      <nav class="desktop-nav"><a href="/index.html">Início</a><a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a></nav>
+      <nav class="desktop-nav">
+        <a href="/index.html">Início</a>
+        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a>
+      </nav>
       <div class="header-actions">
         <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
-        <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>@<span data-user-name>usuario</span></a>
+        <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
+          @<span data-user-name>usuario</span>
+        </a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
+      <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu" data-open="false">
+      <div class="mobile-menu-panel">
+        <a href="/index.html" data-close-menu>Início</a>
+        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer" data-close-menu>Instagram</a>
+        <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
+        <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
         <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
     </div>
   </header>
+
   <main class="auth-layout">
     <div class="container auth-grid">
       <section class="glass-card form-card">
         <h1>Crie sua conta 💋</h1>
         <p>É rapidinho. Depois você já pode pedir o acesso vitalício por R$ 5,90 😈</p>
         <form id="signupForm" novalidate>
-          <div class="field"><label for="nome">Seu nome</label><input id="nome" type="text" autocomplete="name"></div>
-          <div class="field"><label for="email">E-mail</label><input id="email" type="email" autocomplete="email"></div>
-          <div class="field"><label for="usuario">Seu usuário</label><input id="usuario" type="text" placeholder="seuusuario"></div>
-          <div class="field"><label for="telegram">Seu Telegram (opcional)</label><input id="telegram" type="text" placeholder="seutelegram"></div>
-          <div class="field"><label for="senha">Senha</label><input id="senha" type="password" autocomplete="new-password"></div>
+          <div class="field">
+            <label for="nome">Seu nome</label>
+            <input id="nome" type="text" autocomplete="name" placeholder="Como posso te chamar?">
+          </div>
+          <div class="field">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
+          </div>
+          <div class="field">
+            <label for="usuario">Seu usuário</label>
+            <input id="usuario" type="text" placeholder="seuusuario" autocomplete="username">
+          </div>
+          <div class="field">
+            <label for="telegram">Telegram <span style="color:var(--muted);font-weight:400;">(opcional)</span></label>
+            <input id="telegram" type="text" placeholder="@seutelegram">
+          </div>
+          <div class="field">
+            <label for="senha">Senha</label>
+            <input id="senha" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres">
+          </div>
           <div class="form-actions">
             <button class="button" type="submit">Criar conta 😈</button>
             <a class="button ghost" href="/login.html">Já tenho conta</a>
@@ -42,6 +76,7 @@
           <div class="message-box" data-message></div>
         </form>
       </section>
+
       <div class="auth-side">
         <img src="/img/preview.svg" alt="Prévia Beatriz Lopes">
         <div class="auth-side-copy">
@@ -51,6 +86,7 @@
       </div>
     </div>
   </main>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/app.js"></script>
