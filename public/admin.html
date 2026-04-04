@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Painel • Beatriz Lopes</title>
+  <title>Painel Admin • Beatriz Lopes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -17,7 +17,7 @@
         <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
         <span>
           <span class="brand-title">Beatriz Lopes</span>
-          <span class="brand-sub">painel privado</span>
+          <span class="brand-sub">painel admin</span>
         </span>
       </a>
       <nav class="desktop-nav">
@@ -25,8 +25,6 @@
         <a href="/minha-conta.html">Minha conta</a>
       </nav>
       <div class="header-actions">
-        <!-- Visitante não deveria estar aqui, mas por segurança os links existem -->
-        <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
         <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
           @<span data-user-name>usuario</span>
         </a>
@@ -37,9 +35,7 @@
     <div class="container mobile-menu" id="mobileMenu" data-open="false">
       <div class="mobile-menu-panel">
         <a href="/index.html" data-close-menu>Início</a>
-        <a href="/minha-conta.html" data-close-menu>Minha conta</a>
-        <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
-        <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
+        <a href="/minha-conta.html" data-auth-only hidden data-close-menu>Minha conta</a>
         <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
     </div>
@@ -47,29 +43,80 @@
 
   <main class="section">
     <div class="container admin-layout">
+
+      <!-- Cabeçalho -->
       <section class="card">
         <span class="badge">painel de controle</span>
-        <h1 class="section-title" style="font-size:40px; margin-top:14px;">Gerenciar acessos</h1>
-        <p class="section-copy">Aprova, remove e acompanha quem pediu o vitalício.</p>
-        <form id="adminSearchForm" class="form-actions" novalidate>
+        <h1 class="section-title" style="font-size:36px;margin-top:14px;">
+          Pedidos de pagamento
+        </h1>
+        <p class="section-copy">
+          <span class="realtime-dot"></span>
+          Atualização em tempo real · Aprove ou recuse manualmente cada pedido.
+        </p>
+
+        <!-- Filtros -->
+        <div class="admin-filters" style="margin-top:20px;">
           <input
             id="adminSearch"
             type="text"
-            placeholder="Buscar por nome, usuário ou e-mail"
-            style="max-width:360px;width:100%;padding:16px 18px;border-radius:18px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;font-family:inherit;font-size:.95rem;outline:none;"
+            placeholder="Buscar por nome ou e-mail"
+            style="flex:1;min-width:200px;max-width:320px;padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:#fff;font-family:inherit;font-size:.88rem;outline:none;"
           >
-          <button class="button" type="submit">Buscar</button>
-        </form>
+          <select id="filterStatus">
+            <option value="">Todos os status</option>
+            <option value="pending">Pendente</option>
+            <option value="approved">Aprovado</option>
+            <option value="rejected">Recusado</option>
+            <option value="canceled">Cancelado</option>
+          </select>
+          <button class="button" onclick="loadAdminPayments()">Buscar</button>
+          <button class="button ghost" onclick="loadAdminPayments(true)">↻ Atualizar</button>
+        </div>
+
         <div class="message-box" data-message></div>
       </section>
 
+      <!-- Lista de pedidos -->
       <section class="card">
-        <div id="adminUsers">
-          <div class="empty-state">Carregando…</div>
+        <div id="adminPayments">
+          <div class="empty-state">Carregando pedidos…</div>
         </div>
+        <!-- Paginação -->
+        <div id="adminPagination" style="display:flex;gap:10px;justify-content:center;margin-top:20px;"></div>
       </section>
+
     </div>
   </main>
+
+  <!-- Modal de recusa -->
+  <div id="rejectModal" class="modal-backdrop" style="display:none;">
+    <div class="modal-box">
+      <h3>Recusar pedido</h3>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:14px;">Informe o motivo da recusa. Isso ficará registrado e visível para o usuário.</p>
+      <textarea id="rejectReason" placeholder="Ex: Comprovante não enviado, valor incorreto…"></textarea>
+      <div class="modal-actions">
+        <button class="button ghost" onclick="closeRejectModal()">Cancelar</button>
+        <button class="btn-reject" id="rejectConfirmBtn" onclick="confirmReject()">Confirmar recusa</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Widget de suporte -->
+  <div class="support-widget">
+    <button class="support-btn" id="supportToggle" title="Suporte" aria-label="Suporte">💬</button>
+    <div class="support-panel" id="supportPanel">
+      <p>Precisa de ajuda? Fala comigo:</p>
+      <a class="support-link instagram" href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">
+        <span>📷</span> Instagram
+      </a>
+      <a class="support-link telegram" id="supportTelegram" href="#" target="_blank" rel="noopener noreferrer">
+        <span>✈️</span> Telegram
+      </a>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>

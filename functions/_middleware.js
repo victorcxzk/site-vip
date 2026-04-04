@@ -1,27 +1,52 @@
 // functions/_middleware.js
-// Adiciona headers de segurança em todas as respostas do site.
-// Roda antes de qualquer function ou asset estático.
+// Middleware global: headers de segurança, rate limiting básico
+
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX       = 60;
+const RATE_LIMIT_AUTH_MAX  = 10;
+
+function checkRateLimit(ip, path, max) {
+  const key  = `${ip}::${path}`;
+  const now  = Date.now();
+  const slot = rateLimitMap.get(key) || { count: 0, reset: now + RATE_LIMIT_WINDOW_MS };
+  if (now > slot.reset) { slot.count = 0; slot.reset = now + RATE_LIMIT_WINDOW_MS; }
+  slot.count++;
+  rateLimitMap.set(key, slot);
+  if (rateLimitMap.size > 10000) {
+    for (const [k, v] of rateLimitMap) { if (Date.now() > v.reset) rateLimitMap.delete(k); }
+  }
+  return slot.count <= max;
+}
 
 export async function onRequest(context) {
-  const response = await context.next();
+  const { request, next } = context;
+  const url  = new URL(request.url);
+  const path = url.pathname;
+  // Usa apenas CF-Connecting-IP (confiável na Cloudflare).
+  // X-Forwarded-For é enviado pelo cliente e pode ser forjado — ignorado.
+  const ip = request.headers.get('CF-Connecting-IP') || 'dev-local';
+
+  const isApiRoute = path.startsWith('/admin/') || path.startsWith('/payments/') || path.startsWith('/api/');
+  if (isApiRoute) {
+    const max = (path.includes('login') || path.includes('reset')) ? RATE_LIMIT_AUTH_MAX : RATE_LIMIT_MAX;
+    if (!checkRateLimit(ip, path, max)) {
+      return new Response(JSON.stringify({ ok: false, error: 'Muitas requisições. Tente em breve.' }), {
+        status: 429,
+        headers: { 'Content-Type': 'application/json', 'Retry-After': '60' }
+      });
+    }
+  }
+
+  const response = await next();
   const headers  = new Headers(response.headers);
 
-  // Evita sniffing de MIME type
   headers.set('X-Content-Type-Options', 'nosniff');
-
-  // Impede o site de ser carregado em iframe de terceiros
   headers.set('X-Frame-Options', 'DENY');
-
-  // Não vazamos a URL de origem ao navegar para sites externos
   headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-
-  // Permissões de hardware desnecessárias bloqueadas
   headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
-
-  // Content Security Policy
-  // connect-src: Supabase REST/Auth + websocket de realtime
-  // frame-ancestors: reforça X-Frame-Options
-  // Telegram é aberto via window.open (navegação), não via fetch/XHR — não precisa em connect-src
+  headers.set('X-XSS-Protection', '1; mode=block');
+  headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
   headers.set(
     'Content-Security-Policy',
     [
@@ -35,7 +60,7 @@ export async function onRequest(context) {
   );
 
   return new Response(response.body, {
-    status:     response.status,
+    status: response.status,
     statusText: response.statusText,
     headers
   });
