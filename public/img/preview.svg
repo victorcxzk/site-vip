@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500">
-  <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#2c103f"/><stop offset="1" stop-color="#160b21"/></linearGradient></defs>
-  <rect width="1200" height="1500" fill="url(#g)"/>
-  <path d="M420 360c0-120 80-200 180-200s180 80 180 200-80 220-180 220-180-100-180-220Z" fill="#ff6fd4" opacity=".88"/>
-  <path d="M250 1140c40-220 190-340 350-340s310 120 350 340" fill="#9d68ff" opacity=".9"/>
-  <text x="50%" y="1410" fill="#fff" font-size="52" text-anchor="middle" font-family="Arial">troque por sua prévia</text>
-</svg>
