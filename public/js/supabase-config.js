@@ -1,16 +1,15 @@
 // ─────────────────────────────────────────────────────────────
 //  Beatriz Lopes Privacy — Configuração do Supabase
 //
-//  COMO PREENCHER:
-//  1. Acesse https://supabase.com → seu projeto → Settings → API
-//  2. Copie "Project URL"  e cole em SUPABASE_URL
-//  3. Copie "anon public"  e cole em SUPABASE_ANON_KEY
-//  4. Em ADMIN_EMAIL_HINT coloque o e-mail da conta admin
-//     (usado só pra esconder/mostrar o link de Admin na nav)
-//  5. Em TELEGRAM_USERNAME coloque o @ do Telegram (sem @)
+//  SUPABASE_URL e SUPABASE_ANON_KEY são públicas por design
+//  do Supabase — a anon key é protegida pelas políticas de RLS.
 //
-//  ⚠️  Nunca coloque a SERVICE_ROLE_KEY aqui.
+//  ⚠️  NUNCA coloque SUPABASE_SERVICE_ROLE_KEY aqui.
 //      Ela fica APENAS nas variáveis de ambiente da Cloudflare.
+//
+//  ADMIN_EMAIL_HINT é usado APENAS para esconder/mostrar o link
+//  visual de Admin na navbar. A validação real é feita pelo
+//  backend comparando com env.ADMIN_EMAIL (variável privada).
 // ─────────────────────────────────────────────────────────────
 
 window.SUPABASE_URL      = 'https://ezpxrhmyetfbnqqqetpm.supabase.co';
@@ -18,18 +17,18 @@ window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXB
 window.ADMIN_EMAIL_HINT  = 'talescxzpx@gmail.com';
 window.TELEGRAM_USERNAME = 'talespwk';
 
-window.createSupabaseClient = function createSupabaseClient() {
-  if (!window.supabase)           return null;
-  if (!window.SUPABASE_URL)       return null;
-  if (!window.SUPABASE_ANON_KEY)  return null;
+window.createSupabaseClient = function () {
+  if (!window.supabase)          return null;
+  if (!window.SUPABASE_URL)      return null;
+  if (!window.SUPABASE_ANON_KEY) return null;
 
   return window.supabase.createClient(
     window.SUPABASE_URL,
     window.SUPABASE_ANON_KEY,
     {
       auth: {
-        persistSession:    true,
-        autoRefreshToken:  true,
+        persistSession:     true,
+        autoRefreshToken:   true,
         detectSessionInUrl: true
       }
     }

@@ -8,9 +8,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
+  <!--
+    Detecta URL de recovery ANTES do DOMContentLoaded para evitar flash do passo 1.
+    O app.js também cuida disso via onAuthStateChange (redundância intencional).
+  -->
+  <script>
+    (function () {
+      var h = window.location.hash   || '';
+      var s = window.location.search || '';
+      if (h.includes('type=recovery') || h.includes('access_token') || s.includes('type=recovery')) {
+        // Marca para o DOMContentLoaded mostrar o passo 2 imediatamente
+        document.documentElement.dataset.recovery = 'true';
+      }
+    })();
+  </script>
 </head>
-<!-- data-page="reset" → app.js detecta e ativa o fluxo de PASSWORD_RECOVERY -->
+<!-- data-page="reset" → app.js detecta e registra listener de PASSWORD_RECOVERY -->
 <body data-page="reset">
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
@@ -30,6 +45,7 @@
   <main class="auth-layout">
     <div class="container auth-grid">
       <section class="glass-card form-card">
+
         <!-- Passo 1: pede o e-mail -->
         <div id="resetForm-wrap">
           <h1>Recuperar acesso</h1>
@@ -37,7 +53,7 @@
           <form id="resetForm" novalidate>
             <div class="field">
               <label for="email">Seu e-mail</label>
-              <input id="email" type="email" autocomplete="email">
+              <input id="email" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
             </div>
             <div class="form-actions">
               <button class="button" type="submit">Enviar link</button>
@@ -47,18 +63,18 @@
           </form>
         </div>
 
-        <!-- Passo 2: troca a senha (aparece após clicar no link do e-mail) -->
+        <!-- Passo 2: nova senha — aparece após clicar no link do e-mail -->
         <div id="newPassword-wrap" style="display:none;">
           <h1>Nova senha</h1>
           <p>Você chegou pelo link. Agora é só criar uma senha nova 🔐</p>
           <form id="newPasswordForm" novalidate>
             <div class="field">
               <label for="senha">Nova senha</label>
-              <input id="senha" type="password" autocomplete="new-password">
+              <input id="senha" type="password" autocomplete="new-password" placeholder="Mínimo 6 caracteres">
             </div>
             <div class="field">
               <label for="confirmar">Confirmar senha</label>
-              <input id="confirmar" type="password" autocomplete="new-password">
+              <input id="confirmar" type="password" autocomplete="new-password" placeholder="Repita a senha">
             </div>
             <div class="form-actions">
               <button class="button" type="submit">Salvar nova senha</button>
@@ -66,6 +82,7 @@
             <div class="message-box" data-message></div>
           </form>
         </div>
+
       </section>
 
       <div class="auth-side">
@@ -81,20 +98,17 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/app.js"></script>
+
+  <!-- Aplica passo 2 imediatamente se a URL de recovery foi detectada no <head> -->
   <script>
-    // Detecta evento de PASSWORD_RECOVERY direto no HTML como fallback seguro
-    // O app.js também cuida disso via onAuthStateChange
-    (function() {
-      const hash = window.location.hash || window.location.search;
-      if (hash.includes('type=recovery') || hash.includes('access_token')) {
-        document.addEventListener('DOMContentLoaded', function() {
-          var step1 = document.getElementById('resetForm-wrap');
-          var step2 = document.getElementById('newPassword-wrap');
-          if (step1) step1.style.display = 'none';
-          if (step2) step2.style.display = 'block';
-        });
+    document.addEventListener('DOMContentLoaded', function () {
+      if (document.documentElement.dataset.recovery === 'true') {
+        var step1 = document.getElementById('resetForm-wrap');
+        var step2 = document.getElementById('newPassword-wrap');
+        if (step1) step1.style.display = 'none';
+        if (step2) step2.style.display = 'block';
       }
-    })();
+    });
   </script>
 </body>
 </html>

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-page="admin">
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
@@ -24,10 +25,22 @@
         <a href="/minha-conta.html">Minha conta</a>
       </nav>
       <div class="header-actions">
+        <!-- Visitante não deveria estar aqui, mas por segurança os links existem -->
+        <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
         <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
           @<span data-user-name>usuario</span>
         </a>
-        <button class="button" onclick="logout()">Sair</button>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
+      <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu" data-open="false">
+      <div class="mobile-menu-panel">
+        <a href="/index.html" data-close-menu>Início</a>
+        <a href="/minha-conta.html" data-close-menu>Minha conta</a>
+        <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
+        <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
     </div>
   </header>
@@ -43,7 +56,7 @@
             id="adminSearch"
             type="text"
             placeholder="Buscar por nome, usuário ou e-mail"
-            style="max-width:360px;width:100%;padding:16px 18px;border-radius:18px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;"
+            style="max-width:360px;width:100%;padding:16px 18px;border-radius:18px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;font-family:inherit;font-size:.95rem;outline:none;"
           >
           <button class="button" type="submit">Buscar</button>
         </form>
@@ -52,7 +65,7 @@
 
       <section class="card">
         <div id="adminUsers">
-          <div class="empty-state">Carregando...</div>
+          <div class="empty-state">Carregando…</div>
         </div>
       </section>
     </div>

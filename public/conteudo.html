@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-page="content">
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
@@ -51,7 +52,14 @@
 
   <main class="section">
     <div class="container member-layout">
-      <!-- Conteúdo liberado — visível só se assinante = true -->
+
+      <!--
+        contentArea começa hidden no HTML.
+        O JS só o exibe se o perfil tiver assinante=true.
+        Remover o atributo hidden do DOM via DevTools não libera o conteúdo:
+        o JS sobrescreve o estado na renderização.
+        A proteção real é o RLS do Supabase + verificação no backend.
+      -->
       <section class="content-box card" id="contentArea" hidden>
         <span class="badge">acesso liberado 😈</span>
         <h2>Oi, <span id="contentBuyerName">você</span> 💋</h2>
@@ -67,8 +75,12 @@
         </div>
       </section>
 
-      <!-- Bloqueio — aparece se não for assinante -->
-      <section class="content-locked" id="accessGate">
+      <!--
+        accessGate começa hidden no HTML também.
+        O JS exibe o gate se o usuário não for assinante.
+        Ambos começam hidden para evitar flash de conteúdo antes da verificação.
+      -->
+      <section class="content-locked" id="accessGate" hidden>
         <img src="/img/hero-cover.svg" alt="Prévia Beatriz Lopes">
         <div class="veil"></div>
         <div class="content-locked-copy">
@@ -80,6 +92,7 @@
           </div>
         </div>
       </section>
+
     </div>
   </main>
 

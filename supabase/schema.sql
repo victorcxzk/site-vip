@@ -1,6 +1,7 @@
 -- ============================================================
--- Beatriz Lopes Privacy — Schema completo v2
--- Execute no Supabase SQL Editor (pode rodar mais de uma vez)
+-- Beatriz Lopes Privacy — Schema v3 (produção)
+-- Execute no Supabase SQL Editor
+-- Idempotente: pode rodar mais de uma vez com segurança
 -- ============================================================
 
 create extension if not exists "uuid-ossp";
@@ -10,18 +11,18 @@ create extension if not exists "uuid-ossp";
 -- ============================================================
 
 create table if not exists public.perfis (
-  id               uuid        primary key references auth.users(id) on delete cascade,
-  email            text,
-  nome             text,
-  usuario          text,
-  telegram         text,
-  bio              text,
-  assinante        boolean     not null default false,
-  plano            text,
+  id                uuid        primary key references auth.users(id) on delete cascade,
+  email             text,
+  nome              text,
+  usuario           text,
+  telegram          text,
+  bio               text,
+  assinante         boolean     not null default false,
+  plano             text,
   assinatura_inicio timestamptz,
-  assinatura_fim   timestamptz,
-  criado_em        timestamptz not null default now(),
-  atualizado_em    timestamptz not null default now()
+  assinatura_fim    timestamptz,
+  criado_em         timestamptz not null default now(),
+  atualizado_em     timestamptz not null default now()
 );
 
 create table if not exists public.pedidos_acesso (
@@ -36,7 +37,7 @@ create table if not exists public.pedidos_acesso (
 );
 
 -- ============================================================
--- FUNÇÕES E TRIGGERS
+-- FUNÇÃO: cria perfil ao registrar novo usuário
 -- ============================================================
 
 create or replace function public.handle_new_user()
@@ -53,7 +54,7 @@ begin
     new.email,
     coalesce(new.raw_user_meta_data->>'nome', split_part(new.email, '@', 1)),
     coalesce(new.raw_user_meta_data->>'usuario', split_part(new.email, '@', 1)),
-    nullif(new.raw_user_meta_data->>'telegram', ''),
+    nullif(trim(coalesce(new.raw_user_meta_data->>'telegram', '')), ''),
     now(),
     now()
   )
@@ -64,6 +65,11 @@ begin
       telegram      = coalesce(excluded.telegram, public.perfis.telegram),
       atualizado_em = now();
   return new;
+exception
+  when others then
+    -- Nunca deixa o registro de auth falhar por causa do perfil
+    raise warning 'handle_new_user falhou para %: %', new.id, sqlerrm;
+    return new;
 end;
 $$;
 
@@ -71,6 +77,10 @@ drop trigger if exists on_auth_user_created on auth.users;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
+
+-- ============================================================
+-- FUNÇÃO: atualiza atualizado_em automaticamente
+-- ============================================================
 
 create or replace function public.touch_updated_at()
 returns trigger
@@ -92,26 +102,38 @@ create trigger pedidos_touch_updated_at
   before update on public.pedidos_acesso
   for each row execute procedure public.touch_updated_at();
 
--- Bloqueia mudança de campos de assinatura via usuário comum.
--- Service_role (backend admin) passa livre.
+-- ============================================================
+-- FUNÇÃO: bloqueia atualização de campos sensíveis por usuário
+-- comum via client anon/authenticated.
+-- Service role (backend Cloudflare) passa livre.
+--
+-- NOTA: current_user retorna o papel do executor da função.
+-- Para chamadas REST Supabase com anon/authenticated key,
+-- o current_user é 'anon' ou 'authenticated'.
+-- Para service_role key é 'service_role'.
+-- Usamos current_user (não current_setting) para ser preciso.
+-- ============================================================
+
 create or replace function public.block_sensitive_profile_updates()
 returns trigger
 language plpgsql
+security invoker
 as $$
-declare
-  _role text;
 begin
-  _role := current_setting('role', true);
-  if _role in ('service_role', 'postgres', 'supabase_admin') then
+  -- Permite service_role, postgres e supabase_admin sem restrição
+  if current_user in ('service_role', 'postgres', 'supabase_admin', 'supabase_auth_admin') then
     return new;
   end if;
 
-  if new.assinante         is distinct from old.assinante
-  or new.plano             is distinct from old.plano
-  or new.assinatura_inicio is distinct from old.assinatura_inicio
-  or new.assinatura_fim    is distinct from old.assinatura_fim then
-    raise exception 'Você não pode alterar o acesso por conta própria.';
+  -- Bloqueia tentativa de alterar campos de assinatura via usuário comum
+  if (new.assinante         is distinct from old.assinante)
+  or (new.plano             is distinct from old.plano)
+  or (new.assinatura_inicio is distinct from old.assinatura_inicio)
+  or (new.assinatura_fim    is distinct from old.assinatura_fim) then
+    raise exception 'Operação não permitida.'
+      using hint = 'Campos de assinatura só podem ser alterados pelo sistema.';
   end if;
+
   return new;
 end;
 $$;
@@ -128,26 +150,36 @@ create trigger prevent_sensitive_profile_updates
 alter table public.perfis         enable row level security;
 alter table public.pedidos_acesso enable row level security;
 
-drop policy if exists "perfis_select_own"      on public.perfis;
+-- Perfis: usuário lê apenas o próprio perfil
+drop policy if exists "perfis_select_own" on public.perfis;
 create policy "perfis_select_own"
   on public.perfis for select
   using (auth.uid() = id);
 
+-- Perfis: usuário atualiza apenas o próprio (campos não-sensíveis;
+-- o trigger acima garante que campos sensíveis não mudem)
 drop policy if exists "perfis_update_own_safe" on public.perfis;
 create policy "perfis_update_own_safe"
   on public.perfis for update
   using  (auth.uid() = id)
   with check (auth.uid() = id);
 
-drop policy if exists "pedidos_select_own"     on public.pedidos_acesso;
+-- Pedidos: usuário lê apenas os próprios pedidos
+drop policy if exists "pedidos_select_own" on public.pedidos_acesso;
 create policy "pedidos_select_own"
   on public.pedidos_acesso for select
   using (auth.uid() = user_id);
 
-drop policy if exists "pedidos_insert_own"     on public.pedidos_acesso;
+-- Pedidos: usuário só insere pedido para si mesmo
+drop policy if exists "pedidos_insert_own" on public.pedidos_acesso;
 create policy "pedidos_insert_own"
   on public.pedidos_acesso for insert
   with check (auth.uid() = user_id);
+
+-- Pedidos: usuário comum NÃO pode atualizar pedidos
+-- (só o backend via service_role pode)
+drop policy if exists "pedidos_update_blocked" on public.pedidos_acesso;
+-- Intencionalmente sem policy de update para usuários comuns
 
 -- ============================================================
 -- ÍNDICES

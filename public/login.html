@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body data-page="login">
+
   <header class="site-header">
     <div class="container header-inner">
       <a href="/index.html" class="brand">
@@ -30,6 +31,16 @@
         </a>
         <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
+      <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+    <div class="container mobile-menu" id="mobileMenu" data-open="false">
+      <div class="mobile-menu-panel">
+        <a href="/index.html" data-close-menu>Início</a>
+        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer" data-close-menu>Instagram</a>
+        <a href="/criar-conta.html" data-guest-only data-close-menu>Criar conta</a>
+        <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+      </div>
     </div>
   </header>
 
@@ -48,11 +59,11 @@
         <form id="loginForm" novalidate>
           <div class="field">
             <label for="email">E-mail</label>
-            <input id="email" type="email" autocomplete="email">
+            <input id="email" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
           </div>
           <div class="field">
             <label for="senha">Senha</label>
-            <input id="senha" type="password" autocomplete="current-password">
+            <input id="senha" type="password" autocomplete="current-password" placeholder="Sua senha">
           </div>
           <div class="form-actions">
             <button class="button" type="submit">Entrar 😈</button>
