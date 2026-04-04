@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Entrar • Beatriz Lopes</title>
+  <title>Painel • Beatriz Lopes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
 </head>
-<body data-page="login">
+<body data-page="admin">
 
   <header class="site-header">
     <div class="container header-inner">
@@ -17,15 +17,16 @@
         <span class="brand-badge"><img src="/img/avatar-photo.svg" alt="Beatriz Lopes"></span>
         <span>
           <span class="brand-title">Beatriz Lopes</span>
-          <span class="brand-sub">privacy exclusivo 😈</span>
+          <span class="brand-sub">painel privado</span>
         </span>
       </a>
       <nav class="desktop-nav">
         <a href="/index.html">Início</a>
-        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="/minha-conta.html">Minha conta</a>
       </nav>
       <div class="header-actions">
-        <a class="button" href="/criar-conta.html" data-guest-only>Criar conta</a>
+        <!-- Visitante não deveria estar aqui, mas por segurança os links existem -->
+        <a class="button ghost" href="/login.html" data-guest-only>Entrar</a>
         <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
           @<span data-user-name>usuario</span>
         </a>
@@ -36,44 +37,36 @@
     <div class="container mobile-menu" id="mobileMenu" data-open="false">
       <div class="mobile-menu-panel">
         <a href="/index.html" data-close-menu>Início</a>
-        <a href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer" data-close-menu>Instagram</a>
-        <a href="/criar-conta.html" data-guest-only data-close-menu>Criar conta</a>
+        <a href="/minha-conta.html" data-close-menu>Minha conta</a>
+        <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
         <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
         <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
     </div>
   </header>
 
-  <main class="auth-layout">
-    <div class="container auth-grid">
-      <div class="auth-side">
-        <img src="/img/hero-cover.svg" alt="Beatriz Lopes">
-        <div class="auth-side-copy">
-          <h2>Entra e vem ver tudo mais de perto 😈</h2>
-          <p>Seu acesso fica salvo na conta. Depois é só liberar e aproveitar 💋</p>
-        </div>
-      </div>
-      <section class="glass-card form-card">
-        <h1>Entrar</h1>
-        <p>Coloca seu e-mail e sua senha pra voltar rapidinho 🔥</p>
-        <form id="loginForm" novalidate>
-          <div class="field">
-            <label for="email">E-mail</label>
-            <input id="email" type="email" autocomplete="email" placeholder="seuemail@exemplo.com">
-          </div>
-          <div class="field">
-            <label for="senha">Senha</label>
-            <input id="senha" type="password" autocomplete="current-password" placeholder="Sua senha">
-          </div>
-          <div class="form-actions">
-            <button class="button" type="submit">Entrar 😈</button>
-            <a class="button ghost" href="/criar-conta.html">Criar conta</a>
-          </div>
-          <div class="inline-links">
-            <a href="/redefinir-senha.html">Esqueci minha senha</a>
-          </div>
-          <div class="message-box" data-message></div>
+  <main class="section">
+    <div class="container admin-layout">
+      <section class="card">
+        <span class="badge">painel de controle</span>
+        <h1 class="section-title" style="font-size:40px; margin-top:14px;">Gerenciar acessos</h1>
+        <p class="section-copy">Aprova, remove e acompanha quem pediu o vitalício.</p>
+        <form id="adminSearchForm" class="form-actions" novalidate>
+          <input
+            id="adminSearch"
+            type="text"
+            placeholder="Buscar por nome, usuário ou e-mail"
+            style="max-width:360px;width:100%;padding:16px 18px;border-radius:18px;border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.04);color:#fff;font-family:inherit;font-size:.95rem;outline:none;"
+          >
+          <button class="button" type="submit">Buscar</button>
         </form>
+        <div class="message-box" data-message></div>
+      </section>
+
+      <section class="card">
+        <div id="adminUsers">
+          <div class="empty-state">Carregando…</div>
+        </div>
       </section>
     </div>
   </main>

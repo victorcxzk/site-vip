@@ -31,7 +31,8 @@
         <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
           <span class="header-user-label">@<span data-user-name>usuario</span></span>
         </a>
-<button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+        <a class="button ghost" href="/admin.html" data-admin-only hidden>Admin</a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
       <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
     </div>
@@ -43,7 +44,8 @@
         <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
         <a href="/criar-conta.html" data-guest-only data-close-menu>Criar conta</a>
         <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
-<button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+        <a href="/admin.html" data-admin-only hidden data-close-menu>Admin</a>
+        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
     </div>
   </header>
@@ -100,18 +102,6 @@
       <span>Instagram: @lopes.beeatrizz • Telegram: @talespwk</span>
     </div>
   </footer>
-
-
-  <!-- Widget de suporte -->
-  <div class="support-widget">
-    <button class="support-btn" id="supportToggle" title="Suporte" aria-label="Suporte">💬</button>
-    <div class="support-panel" id="supportPanel">
-      <p>Precisa de ajuda?</p>
-      <a class="support-link instagram" href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer"><span>📷</span> Instagram</a>
-      <a class="support-link telegram" id="supportTelegram" href="https://t.me/talespwk" target="_blank" rel="noopener noreferrer"><span>✈️</span> Telegram</a>
-    </div>
-  </div>
-  <div class="toast-container" id="toastContainer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>

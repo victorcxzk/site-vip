@@ -2,11 +2,9 @@
   "name": "beatriz-lopes-privacy",
   "private": true,
   "type": "module",
-  "version": "2.0.0",
   "scripts": {
-    "dev":    "npx wrangler pages dev public --compatibility-date=2024-09-23",
-    "deploy": "npx wrangler pages deploy public",
-    "check":  "node --input-type=module < scripts/check-env.mjs"
+    "dev": "npx wrangler pages dev public --compatibility-date=2024-09-23",
+    "deploy": "npx wrangler pages deploy public"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.57.4"
