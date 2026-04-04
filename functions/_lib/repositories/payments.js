@@ -97,18 +97,53 @@ export async function listAllPayments(db, { status, search, page = 1, limit = 50
       rejected_at,
       rejected_by,
       rejection_reason,
-      perfis!payments_user_id_fkey(email,nome,usuario,telegram),
-      plans!payments_plan_id_fkey(name,duration_days)
+      plans(name,duration_days)
     `)
     .order('created_at', { ascending: false })
     .range((page - 1) * limit, page * limit - 1);
 
   if (status) query = query.eq('status', status);
-  if (search) {
-    const safe = search.replace(/[%_\\]/g, '\\$&');
-    query = query.or(`perfis.email.ilike.%${safe}%,perfis.nome.ilike.%${safe}%`);
+
+  const { data, error } = await query;
+  if (error) return { data: null, error };
+
+  let payments = data || [];
+  const userIds = [...new Set(payments.map((p) => p.user_id).filter(Boolean))];
+
+  if (userIds.length) {
+    const { data: perfis, error: perfisErr } = await db
+      .from('perfis')
+      .select('id,email,nome,usuario,telegram')
+      .in('id', userIds);
+
+    if (perfisErr) return { data: null, error: perfisErr };
+
+    const perfisMap = new Map((perfis || []).map((p) => [p.id, p]));
+
+    payments = payments.map((p) => ({
+      ...p,
+      perfis: perfisMap.get(p.user_id) || null
+    }));
+  } else {
+    payments = payments.map((p) => ({ ...p, perfis: null }));
   }
 
-  const { data, error, count } = await query;
-  return { data, error, count };
+  if (search) {
+    const safe = String(search).toLowerCase();
+
+    payments = payments.filter((p) => {
+      const perfil = p.perfis || {};
+      return [
+        perfil.email || '',
+        perfil.nome || '',
+        perfil.usuario || '',
+        perfil.telegram || '',
+        p.status || '',
+        p.notes || '',
+        p.proof_text || ''
+      ].some((v) => String(v).toLowerCase().includes(safe));
+    });
+  }
+
+  return { data: payments, error: null };
 }

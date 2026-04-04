@@ -31,8 +31,7 @@
         <a class="button ghost header-user" href="/minha-conta.html" data-auth-only hidden>
           <span class="header-user-label">@<span data-user-name>usuario</span></span>
         </a>
-        <a class="button ghost" href="/admin.html" data-admin-only hidden>Admin</a>
-        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+<button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
       <button class="menu-toggle" id="mobileMenuToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
     </div>
@@ -44,8 +43,7 @@
         <a href="/login.html" data-guest-only data-close-menu>Entrar</a>
         <a href="/criar-conta.html" data-guest-only data-close-menu>Criar conta</a>
         <a href="/minha-conta.html" data-auth-only hidden data-close-menu>@<span data-user-name>usuario</span></a>
-        <a href="/admin.html" data-admin-only hidden data-close-menu>Admin</a>
-        <button class="button" data-auth-only hidden onclick="logout()">Sair</button>
+<button class="button" data-auth-only hidden onclick="logout()">Sair</button>
       </div>
     </div>
   </header>
@@ -55,8 +53,8 @@
 
       <section class="plan-card" id="planCard">
         <span class="badge">plano único 😈</span>
-        <h1 data-plan-name>Vitalício</h1>
-        <div class="price" data-plan-price>R$ 5,90</div>
+        <h1 id="planName">Vitalício</h1>
+        <div class="price" id="planPrice">R$ 5,90</div>
         <p>Entrou uma vez, fica com acesso liberado pra sempre 💋</p>
         <ul>
           <li>Conteúdos mais quentes 😈</li>
@@ -74,46 +72,75 @@
         <h2 class="section-title" style="font-size:42px;">
           Oi, <span id="buyerName">linda</span> 💋
         </h2>
-        <p class="section-copy">
-          Toca no botão e eu já recebo seu pedido. Depois o Telegram abre pra você me chamar
-          direto e a gente resolve rapidinho 🔥
-        </p>
 
-        <div class="steps" style="margin-top:22px;">
-          <div class="step">
-            <strong>1. Envia o pedido</strong>
-            <p>Sua conta fica marcada na fila certinho.</p>
+        <!-- Estado: sem pedido -->
+        <div id="stateNoPedido">
+          <p class="section-copy">
+            Toca no botão e eu já recebo seu pedido. Depois o Telegram abre pra você me chamar
+            direto e a gente resolve rapidinho 🔥
+          </p>
+          <div class="form-actions">
+            <button class="button" id="buyButton">
+              Quero meu acesso agora 😈
+            </button>
           </div>
-          <div class="step">
-            <strong>2. Abre o Telegram</strong>
-            <p>Você me chama em um toque, sem complicação.</p>
+          <p style="font-size:.82rem;color:var(--muted);margin-top:16px;">
+            Após clicar, abra o Telegram e me mande seu comprovante Pix 🔥
+          </p>
+        </div>
+
+        <!-- Estado: pedido pendente -->
+        <div id="statePendente" hidden>
+          <div class="subscription-status-card pending">
+            <div class="subscription-status-label">⏳ Aguardando aprovação</div>
+            <p style="font-size:.9rem;margin:8px 0 0;">
+              Seu pedido foi recebido! Me chame no Telegram com o comprovante para eu liberar mais rápido 💋
+            </p>
           </div>
-          <div class="step">
-            <strong>3. Eu libero</strong>
-            <p>E o seu acesso aparece na hora 😈</p>
+          <div class="form-actions" style="margin-top:16px;">
+            <a class="button" id="telgramFollowUpBtn" href="#" target="_blank" rel="noopener noreferrer">
+              Chamar no Telegram 💬
+            </a>
           </div>
         </div>
 
-        <div class="form-actions" style="margin-top:26px;">
-          <button class="button" id="buyButton">
-            Quero meu acesso por R$ 5,90 😈
-          </button>
-          <a class="button ghost" href="/conteudo.html">Ver prévia</a>
+        <!-- Estado: pedido recusado -->
+        <div id="stateRecusado" hidden>
+          <div class="subscription-status-card inactive">
+            <div class="subscription-status-label" style="color:#ffb3b3;">❌ Pedido recusado</div>
+            <p id="recusadoMotivo" style="font-size:.86rem;margin:8px 0 0;color:var(--muted);"></p>
+          </div>
+          <p class="section-copy" style="margin-top:16px;">
+            Fale comigo no Telegram ou Instagram pra resolver 💋
+          </p>
+          <div class="form-actions">
+            <button class="button" id="buyButtonRetry">
+              Tentar novamente 😈
+            </button>
+          </div>
         </div>
 
-        <p class="price-note">Plano vitalício • R$ 5,90 • Telegram @talespwk</p>
-        <div class="message-box" data-message></div>
+        <div class="message-box" data-message style="margin-top:20px;"></div>
       </section>
 
     </div>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-box">
-      <span>Beatriz Lopes 😈</span>
-      <span>Instagram: @lopes.beeatrizz • Telegram: @talespwk</span>
+  <!-- Widget de suporte -->
+  <div class="support-widget">
+    <button class="support-btn" id="supportToggle" title="Suporte" aria-label="Suporte">💬</button>
+    <div class="support-panel" id="supportPanel">
+      <p>Precisa de ajuda?</p>
+      <a class="support-link instagram" href="https://instagram.com/lopes.beeatrizz" target="_blank" rel="noopener noreferrer">
+        <span>📷</span> Instagram
+      </a>
+      <a class="support-link telegram" id="supportTelegram" href="#" target="_blank" rel="noopener noreferrer">
+        <span>✈️</span> Telegram
+      </a>
     </div>
-  </footer>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
