@@ -46,6 +46,53 @@
     return 'https://t.me/' + user + (text ? '?text=' + encodeURIComponent(text) : '');
   }
 
+  function instagramDmLink() {
+    var url = String(window.INSTAGRAM_DM_URL || '').trim();
+    if (url) return url;
+    var profileUrl = String(CONTACT.instagram || '').trim();
+    var username = profileUrl.replace(/^https?:\/\/(www\.)?instagram\.com\//i, '').split('/')[0].replace('@', '').trim();
+    return username ? 'https://ig.me/m/' + username : CONTACT.instagram;
+  }
+
+  async function copyText(text) {
+    if (!text) return false;
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch (_) {}
+
+    try {
+      var area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', 'readonly');
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      area.style.pointerEvents = 'none';
+      document.body.appendChild(area);
+      area.focus();
+      area.select();
+      var ok = document.execCommand('copy');
+      document.body.removeChild(area);
+      return !!ok;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  async function openInstagramPurchase(planName, planPrice) {
+    var message = 'Oi! Vim pelo site e quero o acesso ' + (planName || 'Vitalício') + ' por ' + money(planPrice || 5.90) + '.';
+    var copied = await copyText(message);
+    if (copied) toast('success', 'Mensagem copiada. Agora é só colar no Direct do Instagram 💖');
+    else toast('info', 'Abra o Instagram e envie: ' + message);
+
+    var url = instagramDmLink();
+    setTimeout(function () {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }, 250);
+  }
+
   function isActiveSubscriber(profile) {
     if (!profile || !profile.assinante) return false;
     if (!profile.assinatura_fim) return true;
@@ -342,14 +389,11 @@
 
       if (!res.ok) throw new Error(result.error || 'Não foi possível enviar seu pedido.');
 
-      toast('success', 'Pedido enviado 😈 me chama no Telegram com o comprovante!');
+      toast('success', 'Pedido enviado 😈 vou te levar pro Instagram agora!');
 
       var planName = (result.plan && result.plan.name) || 'Vitalício';
       var planPrice = (result.plan && result.plan.price) || 5.90;
-      var tgUrl = telegramLink(
-        'Oi Beatriz! Acabei de pedir o acesso ' + planName + ' de ' + money(planPrice) + ' no site.'
-      );
-      setTimeout(function () { window.open(tgUrl, '_blank', 'noopener,noreferrer'); }, 400);
+      await openInstagramPurchase(planName, planPrice);
 
       await renderSubscriptionPage();
     } catch (err) {
@@ -428,7 +472,7 @@
           } else if (latestPayment.status === 'pending') {
             if (statePendente) statePendente.hidden = false;
             var tgFollowUp = byId('telgramFollowUpBtn');
-            if (tgFollowUp) tgFollowUp.href = telegramLink('Oi Beatriz! Estou aguardando a aprovação do meu acesso.');
+            if (tgFollowUp) tgFollowUp.href = instagramDmLink();
           } else if (latestPayment.status === 'rejected') {
             if (stateRecusado) stateRecusado.hidden = false;
             var motivoEl = byId('recusadoMotivo');
@@ -896,9 +940,10 @@
     var panel = byId('supportPanel');
     if (!btn || !panel) return;
 
-    // Configura link do Telegram
     var tgEl = byId('supportTelegram');
     if (tgEl) tgEl.href = CONTACT.telegram;
+    var igEl = byId('supportInstagram');
+    if (igEl) igEl.href = CONTACT.instagram;
 
     btn.addEventListener('click', function (e) {
       e.stopPropagation();
