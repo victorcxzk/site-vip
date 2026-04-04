@@ -793,6 +793,8 @@
     }
   }
 
+  }
+
   function setupAdminRealtime(token) {
     if (_realtimeChannel) return;
     try {
@@ -886,6 +888,7 @@
 
   // Alias legado
   window.loadAdminUsers = loadAdminPayments;
+  window.loadAdminPayments = loadAdminPayments;
 
   // ─── WIDGET DE SUPORTE ────────────────────────────────────────
   function initSupportWidget() {
